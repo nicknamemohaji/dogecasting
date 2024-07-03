@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 16:20:26 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/04 03:55:06 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/07/04 06:36:55 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void check_leak(void)
 
 int	main(void)
 {
+	printf("sizeof %lu \n", sizeof(t_dda));
 	t_image	mlx_image;
 	t_frame	mlx_frame;
 

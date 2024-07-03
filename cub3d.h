@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:48:25 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/04 04:44:42 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/07/04 06:27:53 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@
 /*********** ft_mlx ************/
 // mlx_image.c
 
-void			ft_mlx_image_put(t_frame *frame, t_vector2i pos,
-					int color, int level);
+void			ft_mlx_image_put(t_frame *frame, t_vector2i pos, int color);
 unsigned int	ft_mlx_image_color(t_image *img, int x, int y);
 int				ft_mlx_render(t_frame *frame);
 
@@ -80,7 +79,5 @@ void			cub3d_render_draw(t_frame *frame,
 
 void			cub3d_minimap(t_frame *frame, const t_map *map,
 					const t_vector2d player_pos);
-void			cub3d_minimap_ray(t_frame *frame, t_dda *dda,
-					t_vector2i ray_pos, t_vector2d player_pos);
 
 #endif

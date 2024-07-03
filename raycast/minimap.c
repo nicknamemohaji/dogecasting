@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 02:27:52 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/04 03:52:46 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/07/04 06:28:12 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void		cub3d_minimap(t_frame *frame, const t_map *map,
 				const t_vector2d player_pos);
-void		cub3d_minimap_ray(t_frame *frame, t_dda *dda,
-				t_vector2i ray_pos, t_vector2d player_pos);
 static void	draw_rectangle(t_frame *frame, unsigned int color, t_vector2i pos);
 static void	draw_circle(t_frame *frame, unsigned int color, t_vector2d pos);
 
@@ -43,23 +41,6 @@ void	cub3d_minimap(t_frame *frame, const t_map *map,
 	draw_circle(frame, 0xcccc00, player_pos);
 }
 
-void	cub3d_minimap_ray(t_frame *frame, t_dda *dda,
-			t_vector2i ray_pos, t_vector2d p_pos)
-{
-	int			x;
-	int			y;
-
-	// TODO fix ray 
-	while ((int) p_pos.x != ray_pos.x && (int) p_pos.y != ray_pos.y)
-	{
-		x = (int)(p_pos.x * frame->map.minimap_divider);
-		y = (int)(p_pos.y * frame->map.minimap_divider);
-		ft_mlx_image_put(frame, (t_vector2i){x, y}, 0xff0000, LAYER_RAY);
-		p_pos.x += dda->ray_dir.x / (double) frame->map.minimap_divider;
-		p_pos.y += dda->ray_dir.y / (double) frame->map.minimap_divider;
-	}
-}
-
 static void	draw_rectangle(t_frame *frame, unsigned int color, t_vector2i pos)
 {
 	t_vector2i			screen_pos;
@@ -75,7 +56,7 @@ static void	draw_rectangle(t_frame *frame, unsigned int color, t_vector2i pos)
 				pos.x * frame->map.minimap_divider + screen_pos.x,
 				pos.y * frame->map.minimap_divider + screen_pos.y,
 			},
-				color, LAYER_MAP);
+				color);
 		}
 	}
 }
@@ -101,7 +82,7 @@ static void	draw_circle(t_frame *frame, unsigned int color, t_vector2d p_pos)
 				ft_mlx_image_put(
 					frame,
 					(t_vector2i){pos.x, pos.y},
-					color, LAYER_MAP);
+					color);
 			}
 		}
 	}

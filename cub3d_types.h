@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:02:01 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/06/17 06:40:46 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/07/04 06:29:03 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,7 @@ typedef struct s_frame {
 	t_vector2d	player_pos;
 	t_vector2d	camera_dir;
 
-	t_dda		dda[SCREEN_WIDTH];
-	int			screen[SCREEN_WIDTH][SCREEN_HEIGTH];
+	t_dda		*dda;
 	void		(*draw)(struct s_frame *frame);
 }	t_frame;
 

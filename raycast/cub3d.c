@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 17:37:41 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/04 03:52:17 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/07/04 06:26:26 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ static void	draw_ceilng_and_floor(t_frame *frame)
 		while (++x < SCREEN_WIDTH)
 		{
 			(void) texture;
-			ft_mlx_image_put(frame, (t_vector2i){x,y}, 0x00ffff, LAYER_BG);
-			ft_mlx_image_put(frame, (t_vector2i){x, (SCREEN_HEIGTH - 1 - y)}, 0xffff00, LAYER_BG);
+			ft_mlx_image_put(frame, (t_vector2i){x,y}, 0x00ffff);
+			ft_mlx_image_put(frame, (t_vector2i){x, (SCREEN_HEIGTH - 1 - y)}, 0xffff00);
 			// t_vector2i	cell;
 			// cell.x = (int)floor.x;
 			// cell.y = (int)floor.y;

@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 05:28:09 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/04 05:58:24 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/07/04 06:26:53 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ void	cub3d_render_draw(t_frame *frame, t_render_params const *params)
 			frame,
 			(t_vector2i){x, y},
 			ft_mlx_image_color(params->texture->image,
-				tex_pos.x, tex_pos.y),
-			LAYER_RENDER
+				tex_pos.x, tex_pos.y)
 			);
 	}
 }
