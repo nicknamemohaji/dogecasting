@@ -19,5 +19,8 @@ jobs:
         run: |
           for file in $(find . -type f \( -name '*.c' -or -name '*.h' \) -and -not  -path "./minilibx/*"); do 
             norminette "$file"
-            if [[ $? -ne 0 ]] exit $?
+            if [[ $? -ne 0 ]]; then
+              echo "norminette error on $file"
+              exit $?
+            fi
           done
