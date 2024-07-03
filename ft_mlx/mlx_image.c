@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 04:26:10 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/04 04:01:50 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/07/04 04:52:28 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ unsigned int	ft_mlx_image_color(t_image *img, int x, int y)
 {
 	char	*dst;
 
+	// TODO 캐시 고려하면 한 텍스쳐 이미지에 대해 x축 스캐닝하는게 더 빠를 듯
 	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
 	return ((*(unsigned int *)dst) & 0xffffff);
 }

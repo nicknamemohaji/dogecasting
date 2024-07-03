@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:03:35 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/04 04:05:46 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/07/04 04:36:39 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 // screen size
 # define SCREEN_WIDTH 640
-# define SCREEN_HEIGTH 960
+# define SCREEN_HEIGTH 480
 # define MINIMAP_DIVIDER 8
 
 // include PI
