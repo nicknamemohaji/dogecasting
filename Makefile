@@ -1,14 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/06/13 12:23:51 by kyungjle          #+#    #+#              #
-#    Updated: 2024/07/03 14:50:12 by kyungjle         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
 
 NAME := cub3D
 
@@ -27,7 +16,7 @@ SOURCES :=	ft_mlx/mlx_setup.c \
 OBJECTS := $(SOURCES:.c=.o)
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -O3 #-g3 -fsanitize=address
 HEADERS =  -I $(MLX_DIR) -I .
 INCLUDES =	-L . -l mlx -l m \
 			-framework OpenGL -framework AppKit

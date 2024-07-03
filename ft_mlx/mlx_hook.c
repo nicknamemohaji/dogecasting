@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 23:05:52 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/06/19 18:54:16 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/07/04 03:28:45 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	ft_mlx_destroy(t_frame *frame)
 
 int	ft_mlx_event_key(int keycode, t_frame *frame)
 {
+	static const float	rotate_speed = M_PI / 36.0;
+
 	if (keycode == KEYBOARD_ESC)
 		ft_mlx_destroy(frame);
 	if (keycode == KEYBOARD_A)
@@ -42,9 +44,9 @@ int	ft_mlx_event_key(int keycode, t_frame *frame)
 	else if (keycode == KEYBOARD_S)
 		change_pos(frame, DIR_S, -MOVE_SPEED);
 	else if (keycode == KEYBOARD_LEFT)
-		change_dir(frame, -ROTATE_SPEED);
+		change_dir(frame, -rotate_speed);
 	else if (keycode == KEYBOARD_RIGHT)
-		change_dir(frame, ROTATE_SPEED);
+		change_dir(frame, rotate_speed);
 	return (0);
 }
 
@@ -56,12 +58,13 @@ static void	change_dir(t_frame *frame, double delta)
 
 static void	change_pos(t_frame *frame, t_dir dir, double speed)
 {
-	t_vector2d	new_pos;
-	t_vector2d	direction_vector;
+	t_vector2d			new_pos;
+	t_vector2d			direction_vector;
+	static const float	degree_90 = M_PI / 2.0f;
 
 	direction_vector = ft_vector2d_mul(frame->player_dir, speed);
 	if (dir == DIR_E || dir == DIR_W)
-		direction_vector = ft_vector2d_rotate(direction_vector, PI / 2.0);
+		direction_vector = ft_vector2d_rotate(direction_vector, degree_90);
 	new_pos = ft_vector2d_add(frame->player_pos, direction_vector);
 	// TODO 대각선으로 움직일 때 벽을 뚫고 지나감
 	if (new_pos.x < 0.0 || new_pos.x >= frame->map.map_w

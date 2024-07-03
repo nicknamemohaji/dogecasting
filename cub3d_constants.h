@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:03:35 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/02 15:19:14 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/07/04 04:05:46 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,19 @@
 # define CUB3D_CONSTANTS_H
 
 // screen size
-# define SCREEN_WIDTH 1000
-# define SCREEN_HEIGTH 1000
+# define SCREEN_WIDTH 640
+# define SCREEN_HEIGTH 960
 # define MINIMAP_DIVIDER 8
 
+// include PI
+# include <math.h>
+
 // movement constants
-# define MOVE_SPEED 0.25
-# define ROTATE_SPEED 0.125
+// move: 1/20 tiles
+# define MOVE_SPEED 0.05
+// rotate: 5 degrees
+// fuck norm
+// # define ROTATE_SPEED M_PI / 36.0
 
 // mlx hook constants
 # define ON_KEYDOWN 2
@@ -64,8 +70,5 @@ typedef enum e_layer
 	LAYER_MAP = 3,
 	LAYER_RAY = 4
 }	t_layer;
-
-// PI
-# define PI 3.14
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:48:25 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/03 14:50:03 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/07/04 03:58:58 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,16 @@ void			cub3d(t_frame *frame);
 
 // render_dda.c
 
-void			cub3d_render(t_frame *frame, const t_map map,
+void			cub3d_render(t_frame *frame, const t_map *map,
 					const t_vector2d player_pos, const t_vector2d player_dir);
 
 // render_texture.c
 
-void			cub3d_render_draw(t_frame *frame, t_render_params params);
+void			cub3d_render_draw(t_frame *frame, t_render_params *params);
 
 // minimap.c
 
-void			cub3d_minimap(t_frame *frame, const t_map map,
+void			cub3d_minimap(t_frame *frame, const t_map *map,
 					const t_vector2d player_pos);
 void			cub3d_minimap_ray(t_frame *frame, t_dda *dda,
 					t_vector2i ray_pos, t_vector2d player_pos);

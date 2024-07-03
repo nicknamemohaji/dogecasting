@@ -6,28 +6,30 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 01:51:03 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/02 15:21:27 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/07/04 03:51:13 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void				cub3d_render(t_frame *frame, const t_map map,
+void				cub3d_render(t_frame *frame, const t_map *map,
 						const t_vector2d player_pos,
 						const t_vector2d player_dir);
 static void			calc_dda_param(t_dda *dda, const int x,
 						const t_vector2d player, const t_vector2d camera);
 static void			calc_dda_param2(t_dda *dda, const t_vector2d player_pos);
-static t_vector2i	calc_hit(t_dda *dda, const t_map map, t_vector2i map_pos);
+static t_vector2i	calc_hit(t_dda *dda, const t_map *map, t_vector2i map_pos);
 static void			prepare_render_params(t_render_params *params,
 						t_vector2d player_pos);
 
-void	cub3d_render(t_frame *frame, const t_map map,
+void	cub3d_render(t_frame *frame, const t_map *map,
 			const t_vector2d player_pos, const t_vector2d player_dir)
 {
-	t_vector2i		map_pos;
-	t_render_params	render_param;
-	int				x;
+	t_vector2i			map_pos;
+	t_render_params		render_param;
+	int					x;
+	static const float	screen_ratio = (float) SCREEN_WIDTH
+		/ (float) SCREEN_HEIGTH;
 
 	x = -1;
 	while (++x < SCREEN_WIDTH)
@@ -40,13 +42,12 @@ void	cub3d_render(t_frame *frame, const t_map map,
 		render_param.dda_result = frame->dda[x];
 		if ((frame->dda[x]).dist_plane == 0)
 			(frame->dda[x]).dist_plane = 1;
-		// TODO image size에 맞춰 line height 조정
-		render_param.line_height = (int)(SCREEN_HEIGTH
+		render_param.line_height = (int)(SCREEN_HEIGTH * screen_ratio
 				/ (frame->dda[x]).dist_plane);
-		render_param.texture = map.textures[render_param.dda_result.side];
+		render_param.texture = map->textures[render_param.dda_result.side];
 		render_param.x = x;
 		prepare_render_params(&render_param, player_pos);
-		cub3d_render_draw(frame, render_param);
+		cub3d_render_draw(frame, &render_param);
 		cub3d_minimap_ray(frame, &(frame->dda[x]), map_pos, player_pos);
 	}
 }
@@ -96,9 +97,9 @@ static void	calc_dda_param2(t_dda *dda, const t_vector2d player_pos)
 	}
 }
 
-static t_vector2i	calc_hit(t_dda *dda, const t_map map, t_vector2i map_pos)
+static t_vector2i	calc_hit(t_dda *dda, const t_map *map, t_vector2i map_pos)
 {
-	while (map.map[map_pos.y][map_pos.x] == 0)
+	while (map->map[map_pos.y][map_pos.x] == 0)
 	{
 		if (dda->dist.x < dda->dist.y)
 		{
@@ -142,5 +143,5 @@ static void	prepare_render_params(t_render_params *params,
 		params->wall_pos = player_pos.y + params->dda_result.dist_plane
 			* params->dda_result.ray_dir.y;
 	params->wall_pos -= floor((params->wall_pos));
-	params->step = (1.0l * texture->height) / params->line_height;
+	params->step = ((float) texture->height) / ((float) params->line_height);
 }

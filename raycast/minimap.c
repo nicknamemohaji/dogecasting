@@ -6,20 +6,20 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 02:27:52 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/06/19 18:47:35 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/07/04 03:52:46 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void		cub3d_minimap(t_frame *frame, const t_map map,
+void		cub3d_minimap(t_frame *frame, const t_map *map,
 				const t_vector2d player_pos);
 void		cub3d_minimap_ray(t_frame *frame, t_dda *dda,
 				t_vector2i ray_pos, t_vector2d player_pos);
 static void	draw_rectangle(t_frame *frame, unsigned int color, t_vector2i pos);
 static void	draw_circle(t_frame *frame, unsigned int color, t_vector2d pos);
 
-void	cub3d_minimap(t_frame *frame, const t_map map,
+void	cub3d_minimap(t_frame *frame, const t_map *map,
 			const t_vector2d player_pos)
 {
 	int	x;
@@ -28,12 +28,12 @@ void	cub3d_minimap(t_frame *frame, const t_map map,
 
 	// TODO 시점에 맞춰 미니맵 회전
 	y = -1;
-	while (++y < map.map_h)
+	while (++y < map->map_h)
 	{
 		x = -1;
-		while (++x < map.map_w)
+		while (++x < map->map_w)
 		{
-			if (map.map[y][x] != 0)
+			if (map->map[y][x] != 0)
 				color = 0xffffff;
 			else
 				color = 0x333333;

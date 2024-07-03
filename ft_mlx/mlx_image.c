@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 04:26:10 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/06/27 12:16:06 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/07/04 04:01:50 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	ft_mlx_image_put(t_frame *frame, t_vector2i pos, int color, int level)
 	char	*dst;
 
 	image = frame->image;
-	dst = image->addr +
-		(pos.y * image->line_length + pos.x * (image->bits_per_pixel / 8));
+	dst = image->addr + (pos.y * image->line_length
+			+ pos.x * (image->bits_per_pixel / 8));
 	if (frame->screen[pos.x][pos.y] <= level)
 	{
 		*(unsigned int *)dst = color;

@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 17:37:41 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/06/19 18:41:43 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/07/04 03:52:17 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	draw_ceilng_and_floor(t_frame *frame);
 
 void	cub3d(t_frame *frame)
 {
-	const t_map			map = frame->map;
+	const t_map			*map = &(frame->map);
 	const t_vector2d	player_pos = frame->player_pos;
 	const t_vector2d	player_dir = frame->player_dir;
 
