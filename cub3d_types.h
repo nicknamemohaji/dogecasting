@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:02:01 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/04 06:29:03 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/07/04 08:29:56 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ typedef struct s_map
 	int			**map;
 	int			map_w;
 	int			map_h;
-	int			minimap_divider;
 }	t_map;
 
 // vector structure
@@ -63,7 +62,7 @@ typedef struct s_dda
 	t_vector2d	dist_delta;
 	t_vector2d	ray_dir;
 	t_vector2i	step;
-	int			side;
+	t_dir		side;
 }	t_dda;
 
 // struct for affine texture mapping

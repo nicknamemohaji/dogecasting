@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:48:25 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/04 06:27:53 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/07/04 08:33:15 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <stdlib.h>
 // printf, perror, strerror
 # include <stdio.h>
+// gettimeofday
+# include <sys/time.h>
 // standard math library header
 # include <math.h>
 // mlx library header
@@ -54,8 +56,14 @@ int				ft_mlx_event_key(int keycode, t_frame *frame);
 
 int				ft_mlx_event_mouse(int button, int x, int y, t_frame *frame);
 
+// mlx_shape.c
+
+void			ft_mlx_draw_rectangle(t_frame *frame, const unsigned int size,
+					const unsigned int color, const t_vector2i screen_pos);
+
 /*********** raycast **************/
 // ft_vector2.c
+
 t_vector2d		ft_vector2d_add(t_vector2d n1, t_vector2d n2);
 t_vector2d		ft_vector2d_mul(t_vector2d vec, double scalar);
 t_vector2d		ft_vector2d_rotate(t_vector2d vec, double rad);
@@ -65,19 +73,31 @@ t_vector2i		ft_vector2i_add(t_vector2i n1, t_vector2i n2);
 
 void			cub3d(t_frame *frame);
 
-// render_dda.c
+// render.c
 
-void			cub3d_render(t_frame *frame, const t_map *map,
+void			cub3d_render(t_frame *frame, t_map const *map,
 					const t_vector2d player_pos, const t_vector2d player_dir);
 
 // render_texture.c
 
-void			cub3d_render_draw(t_frame *frame,
+void			render_texture(t_frame *frame,
 					t_render_params const *params);
 
-// minimap.c
+// render_background.c
 
-void			cub3d_minimap(t_frame *frame, const t_map *map,
+void			render_background(t_frame *frame);
+
+/*********** interface **************/
+
+// interface.c
+
+void			cub3d_interface(t_frame *frame, t_map const *map,
 					const t_vector2d player_pos);
+
+// interface_minimap.c
+
+void			interface_minimap(t_frame *frame, t_map const *map,
+					const t_vector2d player_pos);
+void			interface_fps_counter(t_frame *frame);
 
 #endif

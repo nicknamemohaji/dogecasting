@@ -6,18 +6,18 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 05:28:09 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/04 06:26:53 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/07/04 08:28:06 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void		cub3d_render_draw(t_frame *frame,
+void		render_texture(t_frame *frame,
 				t_render_params const *params);
 static void	calculate_texture_pos(t_render_params const *params,
 				t_vector2i *tex_pos, float *tex_y_counter);
 
-void	cub3d_render_draw(t_frame *frame, t_render_params const *params)
+void	render_texture(t_frame *frame, t_render_params const *params)
 {
 	const int		x = params->x;
 	int				y;

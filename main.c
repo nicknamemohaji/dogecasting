@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 16:20:26 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/04 06:36:55 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/07/04 07:06:01 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,6 @@ void prototype(t_frame *frame)
 	t_map *map = &(frame->map);
 	map->map_h = 14;
 	map->map_w = 34;
-	map->minimap_divider = SCREEN_WIDTH / MINIMAP_DIVIDER / map->map_w;
-	if (SCREEN_HEIGTH / MINIMAP_DIVIDER / map->map_h > map->minimap_divider)
-		map->minimap_divider = SCREEN_HEIGTH / MINIMAP_DIVIDER / frame->map.map_h;
 	map->map = malloc(map->map_h * sizeof(int *));
 	for (int i = 0; i < map->map_h; i++)
 		(map->map)[i] = malloc(map->map_w * sizeof(int));

@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:03:35 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/04 04:36:39 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/07/04 08:29:29 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@
 // constants for direction
 typedef enum e_dir
 {
+	UNDEFINED = -1,
 	DIR_N = 0,
 	DIR_S = 1,
 	DIR_W = 2,

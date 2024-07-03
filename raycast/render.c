@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_dda.c                                       :+:      :+:    :+:   */
+/*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 01:51:03 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/04 06:28:26 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/07/04 07:12:18 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void				cub3d_render(t_frame *frame, const t_map *map,
 static void			calc_dda_param(t_dda *dda, const int x,
 						const t_vector2d player, const t_vector2d camera);
 static void			calc_dda_param2(t_dda *dda, const t_vector2d player_pos);
-static t_vector2i	calc_hit(t_dda *dda, const t_map *map, t_vector2i map_pos);
-static void			prepare_render_params(t_render_params *params,
+static t_vector2i	dda(t_dda *dda, const t_map *map, t_vector2i map_pos);
+static void			calc_texture_param(t_render_params *params,
 						t_vector2d player_pos);
 
 void	cub3d_render(t_frame *frame, const t_map *map,
@@ -31,6 +31,7 @@ void	cub3d_render(t_frame *frame, const t_map *map,
 	static const float	screen_ratio = (float) SCREEN_WIDTH
 		/ (float) SCREEN_HEIGTH;
 
+	render_background(frame);
 	x = -1;
 	while (++x < SCREEN_WIDTH)
 	{
@@ -38,7 +39,7 @@ void	cub3d_render(t_frame *frame, const t_map *map,
 		map_pos.y = (int) player_pos.y;
 		calc_dda_param(&(frame->dda[x]), x, player_dir, frame->camera_dir);
 		calc_dda_param2(&(frame->dda[x]), player_pos);
-		map_pos = calc_hit(&(frame->dda[x]), map, map_pos);
+		map_pos = dda(&(frame->dda[x]), map, map_pos);
 		render_param.dda_result = frame->dda[x];
 		if ((frame->dda[x]).dist_plane == 0)
 			(frame->dda[x]).dist_plane = 1;
@@ -46,8 +47,8 @@ void	cub3d_render(t_frame *frame, const t_map *map,
 				/ (frame->dda[x]).dist_plane);
 		render_param.texture = map->textures[render_param.dda_result.side];
 		render_param.x = x;
-		prepare_render_params(&render_param, player_pos);
-		cub3d_render_draw(frame, &render_param);
+		calc_texture_param(&render_param, player_pos);
+		render_texture(frame, &render_param);
 	}
 }
 
@@ -96,7 +97,7 @@ static void	calc_dda_param2(t_dda *dda, const t_vector2d player_pos)
 	}
 }
 
-static t_vector2i	calc_hit(t_dda *dda, const t_map *map, t_vector2i map_pos)
+static t_vector2i	dda(t_dda *dda, const t_map *map, t_vector2i map_pos)
 {
 	while (map->map[map_pos.y][map_pos.x] == 0)
 	{
@@ -124,7 +125,7 @@ static t_vector2i	calc_hit(t_dda *dda, const t_map *map, t_vector2i map_pos)
 	return (map_pos);
 }
 
-static void	prepare_render_params(t_render_params *params,
+static void	calc_texture_param(t_render_params *params,
 				t_vector2d player_pos)
 {
 	const t_texture	*texture = params->texture;
