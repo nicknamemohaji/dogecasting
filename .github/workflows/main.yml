@@ -17,4 +17,7 @@ jobs:
           
       - name: check for 42 norminette requirements 
         run: |
-          find . -type f \( -name '*.c' -or -name '*.h' \) -and -not  -path "./minilibx/*" -exec norminette {} \;
+          for file in $(find . -type f \( -name '*.c' -or -name '*.h' \) -and -not  -path "./minilibx/*"); do 
+            norminette "$file"
+            if [[ $? -ne 0 ]] exit $?
+          done
