@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:48:25 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/06/19 18:19:24 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/07/03 14:50:03 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@
 # include "mlx.h"
 
 /********* custom import ********/
-// libft header
-# include "libft.h"
 // types header
 # include "cub3d_types.h"
 // constants header

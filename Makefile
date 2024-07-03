@@ -6,7 +6,7 @@
 #    By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/13 12:23:51 by kyungjle          #+#    #+#              #
-#    Updated: 2024/07/03 14:47:36 by kyungjle         ###   ########.fr        #
+#    Updated: 2024/07/03 14:50:12 by kyungjle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,8 @@ OBJECTS := $(SOURCES:.c=.o)
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
-HEADERS =  -I $(LIBFT_DIR)headers/ -I $(MLX_DIR) -I .
-INCLUDES =	-L . -l ft -l mlx -l m \
+HEADERS =  -I $(MLX_DIR) -I .
+INCLUDES =	-L . -l mlx -l m \
 			-framework OpenGL -framework AppKit
 
 all: $(NAME)
