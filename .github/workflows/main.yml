@@ -1,0 +1,20 @@
+name: check 42 norminette
+
+on:
+  push:
+  pull_request:
+jobs:
+  check_42_norm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: install 42 norminette
+        run: |
+          sudo apt update
+          sudo apt install python3 -y
+          python3 -m pip install --upgrade pip setuptools
+          python3 -m pip install --upgrade norminette
+          
+      - name: check for 42 norminette requirements 
+        run: |
+          find . -type f \( -name '*.c' -or -name '*.h' \) -and -not  -path "./minilibx/*" -exec norminette {} \;
