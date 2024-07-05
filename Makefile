@@ -17,17 +17,22 @@ OBJECTS := $(SOURCES:.c=.o)
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -O3 #-g3 -fsanitize=address
-HEADERS =  -I $(MLX_DIR) -I .
+HEADERS =  -I $(MLX_DIR) -I . -I libft/includes
 INCLUDES =	-L . -l mlx -l m \
 			-framework OpenGL -framework AppKit
+MLX_INCLUDES = -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
 
 all: $(NAME)
 
-$(NAME): libmlx.dylib $(OBJECTS)
-	$(CC) $(CFLAGS) $^ -o $(NAME) $(INCLUDES)
+$(NAME): libmlx.dylib $(OBJECTS) libft.a
+	$(CC) $(CFLAGS) $^ -o $(NAME) $(INCLUDES) $(LIBFT_INCLUDE)
 
 %.o: %.c
 	@$(CC) $(CFLAGS) $(HEADERS) -c $< -o $*.o
+
+libft.a:
+	@$(MAKE) -C libft all
+	mv libft/libft.a .
 
 libmlx.dylib:
 	@$(MAKE) -C $(MLX_DIR) all
@@ -37,10 +42,12 @@ clean:
 	@$(MAKE) -C $(MLX_DIR) clean
 	@rm -f $(MLX_DIR)*.swiftsourceinfo
 	@rm -rf $(OBJECTS)
-
+	@$(MAKE) -C libft clean
+	
 fclean: clean
 	@rm -f libmlx.dylib
 	@rm -rf $(NAME)
+	@rm -rf libft.a
 
 re: fclean all
 
