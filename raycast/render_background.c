@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 07:08:07 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/04 07:08:50 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/07/07 02:09:48 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ void	draw_ceilng_and_floor(t_frame *frame)
 			floor.x += step.x;
 			floor.y += step.y;
 
-			ft_mlx_image_put(frame, (t_vector2i){x,y}, ft_mlx_image_color(texture->image, texture_pos.x, texture_pos.y), LAYER_BG);
-			ft_mlx_image_put(frame, (t_vector2i){x, (SCREEN_HEIGTH - 1 - y)}, ft_mlx_image_color(texture->image, texture_pos.x, texture_pos.y), LAYER_BG);
+			ft_mlx_image_put(frame, (t_vector2i){x,y}, ft_mlx_texture_color(texture->image, texture_pos.x, texture_pos.y), LAYER_BG);
+			ft_mlx_image_put(frame, (t_vector2i){x, (SCREEN_HEIGTH - 1 - y)}, ft_mlx_texture_color(texture->image, texture_pos.x, texture_pos.y), LAYER_BG);
 		}
 	}
 }

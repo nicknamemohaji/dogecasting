@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:48:25 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/04 08:33:15 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/07/07 02:19:31 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@
 // mlx_image.c
 
 void			ft_mlx_image_put(t_frame *frame, t_vector2i pos, int color);
-unsigned int	ft_mlx_image_color(t_image *img, int x, int y);
 int				ft_mlx_render(t_frame *frame);
 
 // mlx_setup.c
 
 void			ft_mlx_setup(t_frame *frame, t_image *img);
-void			ft_mlx_setup_image(t_frame *frame, t_image *img);
+void			ft_mlx_setup_image(t_frame *frame);
+void			error_exit(const char *msg);
 
 // mlx_hook.c
 
@@ -82,6 +82,7 @@ void			cub3d_render(t_frame *frame, t_map const *map,
 
 void			render_texture(t_frame *frame,
 					t_render_params const *params);
+t_texture		*cub3d_texture_create(t_frame *frame, const char *file);
 
 // render_background.c
 

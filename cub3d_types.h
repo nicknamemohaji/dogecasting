@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:02:01 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/04 08:29:56 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/07/07 02:33:50 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ typedef struct s_image {
 // struct for texture
 typedef struct s_texture
 {
-	t_image	*image;
-	int		height;
-	int		width;
+	unsigned int	*image;
+	int				height;
+	int				width;
 }	t_texture;
 
 // map structure
 typedef struct s_map
 {
-	t_texture	**textures;
+	t_texture	*textures[4];
 	int			**map;
 	int			map_w;
 	int			map_h;

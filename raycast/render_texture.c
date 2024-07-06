@@ -6,16 +6,19 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 05:28:09 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/04 08:28:06 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/07/07 02:34:22 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void		render_texture(t_frame *frame,
-				t_render_params const *params);
-static void	calculate_texture_pos(t_render_params const *params,
-				t_vector2i *tex_pos, float *tex_y_counter);
+void				render_texture(t_frame *frame,
+						t_render_params const *params);
+static void			calculate_texture_pos(t_render_params const *params,
+						t_vector2i *tex_pos, float *tex_y_counter);
+static unsigned int	texture_color(t_texture *texture, int x, int y);
+t_texture			*cub3d_texture_create(t_frame *frame, const char *file);
+static void			transpose_texture(t_texture *texture, t_image image);
 
 void	render_texture(t_frame *frame, t_render_params const *params)
 {
@@ -33,7 +36,7 @@ void	render_texture(t_frame *frame, t_render_params const *params)
 		ft_mlx_image_put(
 			frame,
 			(t_vector2i){x, y},
-			ft_mlx_image_color(params->texture->image,
+			texture_color(params->texture,
 				tex_pos.x, tex_pos.y)
 			);
 	}
@@ -56,5 +59,61 @@ static void	calculate_texture_pos(t_render_params const *params,
 		*tex_y_counter = (params->draw_start
 				- (SCREEN_HEIGTH - params->line_height) / 2)
 			* params->step;
+	}
+}
+
+static unsigned int	texture_color(t_texture *texture, int x, int y)
+{
+	unsigned int	*dst;
+
+	dst = texture->image + (y * texture->width + x);
+	return ((*dst) & 0xffffff);
+}
+
+t_texture	*cub3d_texture_create(t_frame *frame, const char *file)
+{
+	t_texture	*ret;
+	void		*texture_mlx_image;
+	t_image		image;
+
+	ret = malloc(1 * sizeof(t_texture));
+	if (ret == NULL)
+		error_exit("cannot allocate memory\n");
+	texture_mlx_image = mlx_xpm_file_to_image(frame->mlx, (char *)file,
+			&((ret)->width), &((ret)->height));
+	if (texture_mlx_image == NULL)
+		error_exit("cannot open texture\n");
+	ret->image = malloc((ret->height * ret->width) * sizeof(unsigned int));
+	if (ret->image == NULL)
+		error_exit("cannot allocate memory\n");
+	image.img = texture_mlx_image;
+	image.addr = mlx_get_data_addr(
+			texture_mlx_image, &image.bits_per_pixel, &image.line_length,
+			&image.endian);
+	if (image.addr == NULL)
+		error_exit("cannot get address from mlx.image\n");
+	transpose_texture(ret, image);
+	mlx_destroy_image(frame->mlx, texture_mlx_image);
+	return (ret);
+}
+
+static void	transpose_texture(t_texture *texture, t_image image)
+{
+	const int	height = texture->height;
+	const int	width = texture->width;
+	int			x;
+	int			y;
+	char		*dst;
+
+	y = -1;
+	while (++y < height)
+	{
+		x = -1;
+		while (++x < width)
+		{
+			dst = image.addr + (y * image.line_length
+					+ x * (image.bits_per_pixel / 8));
+			texture->image[y * width + x] = *(unsigned int *)dst;
+		}
 	}
 }
