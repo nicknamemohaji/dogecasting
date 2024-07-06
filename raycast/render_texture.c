@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 05:28:09 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/04 08:28:06 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/07/07 01:28:50 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ static void	calculate_texture_pos(t_render_params const *params,
 	const t_texture	*texture = params->texture;
 
 	tex_pos->x = (int)(params->wall_pos * texture->width);
-	if (params->dda_result.side == DIR_W)
+	if (params->dda_result->side == DIR_W)
 		tex_pos->x = texture->width - tex_pos->x - 1;
-	if (params->dda_result.side == DIR_N)
+	if (params->dda_result->side == DIR_S)
 		tex_pos->x = texture->width - tex_pos->x - 1;
 	if (params->draw_end - params->draw_start == params->line_height)
 		*tex_y_counter = 0.0f;
