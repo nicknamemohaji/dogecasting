@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 16:20:26 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/07 02:34:40 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/07/07 03:01:14 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ void prototype(t_frame *frame)
 	atexit(check_leak);
 	t_map *map = &(frame->map);
 	map->map_h = 14;
-	map->map_w = 34;
+	map->map_w = 33;
 	map->map = malloc(map->map_h * sizeof(int *));
 	for (int i = 0; i < map->map_h; i++)
 		(map->map)[i] = malloc(map->map_w * sizeof(int));
-	int worldMap[14][34]=
+	int worldMap[14][33]=
 	{
 		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 		{1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -96,17 +96,22 @@ void prototype(t_frame *frame)
 	// printf("2: %d x %d\n", texture[1]->width, texture[1] -> height);
 	
 	t_texture *texture_doge = cub3d_texture_create(frame, "doge.xpm");
+	printf("---->> doge %p: t_h %d t_w %d\n", texture_doge, texture_doge->height, texture_doge->width);
 	t_texture *texture_grid = cub3d_texture_create(frame, "grid.xpm");
+	printf("---->> grid %p: t_h %d t_w %d\n", texture_grid, texture_grid->height, texture_grid->width);
 	t_texture *texture_42 = cub3d_texture_create(frame, "42.xpm");
+	printf("---->> 42 %p: t_h %d t_w %d\n", texture_42, texture_42->height, texture_42->width);
 	map->textures[DIR_N] = texture_doge;
 	map->textures[DIR_E] = texture_grid;
 	map->textures[DIR_W] = texture_42;
 	map->textures[DIR_S] = texture_doge;
 
-	frame->player_dir.x = 1.0;
-	frame->player_dir.y = 0.0;
-	frame->player_pos.x = 3.0;
-	frame->player_pos.y = 3.0;
-	frame->camera_dir.x = 0.0;
-	frame->camera_dir.y = 0.66;
+	# define START_DIR 90
+	frame->player_dir.x = cos(M_PI / 180.0 * START_DIR);
+	frame->player_dir.y = -sin(M_PI / 180.0 * START_DIR);
+	frame->camera_plane.x = POV * sin(M_PI / 180.0 * START_DIR);
+	frame->camera_plane.y = POV * cos(M_PI / 180.0 * START_DIR);
+
+	frame->player_pos.x = 3;
+	frame->player_pos.y = 3;
 }

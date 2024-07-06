@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 04:26:10 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/07 02:13:01 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/07/07 02:38:41 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_mlx_render(t_frame *frame)
 	ft_mlx_setup_image(frame);
 	frame->draw(frame);
 	mlx_put_image_to_window(frame->mlx, frame->window, frame->image->img, 0, 0);
-	mlx_destroy_image(frame->mlx, frame->image->img);
 	interface_fps_counter(frame);
+	mlx_destroy_image(frame->mlx, frame->image->img);
 	return (0);
 }

@@ -6,26 +6,26 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 05:28:09 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/07 02:34:22 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/07/07 03:05:28 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void				render_texture(t_frame *frame,
-						t_render_params const *params);
-static void			calculate_texture_pos(t_render_params const *params,
-						t_vector2i *tex_pos, float *tex_y_counter);
-static unsigned int	texture_color(t_texture *texture, int x, int y);
-t_texture			*cub3d_texture_create(t_frame *frame, const char *file);
-static void			transpose_texture(t_texture *texture, t_image image);
+void			render_texture(t_frame *frame,
+					t_render_params const *params);
+static void		calculate_texture_pos(t_render_params const *params,
+					t_vector2i *tex_pos, float *tex_y_counter);
+t_texture		*cub3d_texture_create(t_frame *frame, const char *file);
+static void		transpose_texture(t_texture *texture, t_image image);
 
 void	render_texture(t_frame *frame, t_render_params const *params)
 {
-	const int		x = params->x;
-	int				y;
-	t_vector2i		tex_pos;
-	float			tex_yf;
+	const t_texture *const	texture = params->texture;
+	const int				x = params->x;
+	int						y;
+	t_vector2i				tex_pos;
+	float					tex_yf;
 
 	calculate_texture_pos(params, &tex_pos, &tex_yf);
 	y = params->draw_start - 1;
@@ -36,8 +36,7 @@ void	render_texture(t_frame *frame, t_render_params const *params)
 		ft_mlx_image_put(
 			frame,
 			(t_vector2i){x, y},
-			texture_color(params->texture,
-				tex_pos.x, tex_pos.y)
+			texture->image[tex_pos.x * texture->height + tex_pos.y]
 			);
 	}
 }
@@ -48,9 +47,9 @@ static void	calculate_texture_pos(t_render_params const *params,
 	const t_texture	*texture = params->texture;
 
 	tex_pos->x = (int)(params->wall_pos * texture->width);
-	if (params->dda_result.side == DIR_W)
+	if (params->dda_result->side == DIR_W)
 		tex_pos->x = texture->width - tex_pos->x - 1;
-	if (params->dda_result.side == DIR_N)
+	if (params->dda_result->side == DIR_S)
 		tex_pos->x = texture->width - tex_pos->x - 1;
 	if (params->draw_end - params->draw_start == params->line_height)
 		*tex_y_counter = 0.0f;
@@ -60,14 +59,6 @@ static void	calculate_texture_pos(t_render_params const *params,
 				- (SCREEN_HEIGTH - params->line_height) / 2)
 			* params->step;
 	}
-}
-
-static unsigned int	texture_color(t_texture *texture, int x, int y)
-{
-	unsigned int	*dst;
-
-	dst = texture->image + (y * texture->width + x);
-	return ((*dst) & 0xffffff);
 }
 
 t_texture	*cub3d_texture_create(t_frame *frame, const char *file)
@@ -113,7 +104,7 @@ static void	transpose_texture(t_texture *texture, t_image image)
 		{
 			dst = image.addr + (y * image.line_length
 					+ x * (image.bits_per_pixel / 8));
-			texture->image[y * width + x] = *(unsigned int *)dst;
+			texture->image[x * height + y] = *(unsigned int *)dst;
 		}
 	}
 }
