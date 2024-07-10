@@ -7,11 +7,14 @@ SOURCES :=	ft_mlx/mlx_setup.c \
 			ft_mlx/mlx_image.c \
 			ft_mlx/mlx_hook.c \
 			ft_mlx/mlx_hook_2.c \
-			raycast/cub3d.c \
-			raycast/minimap.c \
+			ft_mlx/mlx_shape.c \
 			raycast/ft_vector2.c \
-			raycast/render_dda.c \
+			raycast/cub3d.c \
+			raycast/render.c \
 			raycast/render_texture.c \
+			raycast/render_background.c \
+			interface/interface.c \
+			interface/minimap.c \
 			main.c
 OBJECTS := $(SOURCES:.c=.o)
 
