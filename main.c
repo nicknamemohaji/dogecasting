@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yechakim <yechakim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 16:20:26 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/04 06:36:55 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/07/05 17:26:50 by yechakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,13 @@ void check_leak(void)
 	system("leaks cub3D");
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	printf("sizeof %lu \n", sizeof(t_dda));
 	t_image	mlx_image;
 	t_frame	mlx_frame;
-
+	
+	initialize_data(&mlx_frame, argc, argv);
 	ft_mlx_setup(&mlx_frame, &mlx_image);
 	prototype(&mlx_frame);
 	mlx_frame.draw = &cub3d;
