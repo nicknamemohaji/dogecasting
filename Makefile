@@ -15,21 +15,31 @@ SOURCES :=	ft_mlx/mlx_setup.c \
 			raycast/render_background.c \
 			interface/interface.c \
 			interface/minimap.c \
-			main.c
+			main.c \
+			data_parser/is_exist_file.c \
+			data_parser/is_ext.c \
+			data_parser/parser.c \
+			data_parser/throw_parse_error.c \
+			data_parser/validate_input.c
 OBJECTS := $(SOURCES:.c=.o)
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -O3 #-g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -O3 #-g3 -fsanitize=address 
 HEADERS =  -I $(MLX_DIR) -I . -I libft/includes
 INCLUDES =	-L . -l mlx -l m \
 			-framework OpenGL -framework AppKit
 MLX_INCLUDES = -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
 
+ifdef PARSER
+	CFLAGS += -D PARSER=1
+endif
+
+
 all: $(NAME)
 
 $(NAME): libmlx.dylib $(OBJECTS) libft.a
 	$(CC) $(CFLAGS) $^ -o $(NAME) $(INCLUDES) $(LIBFT_INCLUDE)
-
+	
 %.o: %.c
 	@$(CC) $(CFLAGS) $(HEADERS) -c $< -o $*.o
 
@@ -55,3 +65,4 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re bonus
+.ONESHELL:

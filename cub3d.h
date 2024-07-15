@@ -34,7 +34,8 @@
 # include "cub3d_types.h"
 // constants header
 # include "cub3d_constants.h"
-
+// parser header
+# include "cub3d_parser.h"
 /*********** ft_mlx ************/
 // mlx_image.c
 
