@@ -6,7 +6,7 @@
 /*   By: yechakim <yechakim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 14:33:00 by yechakim          #+#    #+#             */
-/*   Updated: 2024/07/10 14:34:18 by yechakim         ###   ########.fr       */
+/*   Updated: 2024/07/15 21:11:57 by yechakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_exist_file(char *filename)
 {
-	int fd;
+	int	fd;
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
