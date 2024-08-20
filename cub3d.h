@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:48:25 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/07 02:19:31 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/08/20 13:57:34 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,5 @@ void			cub3d_interface(t_frame *frame, t_map const *map,
 
 void			interface_minimap(t_frame *frame, t_map const *map,
 					const t_vector2d player_pos);
-void			interface_fps_counter(t_frame *frame);
 
 #endif

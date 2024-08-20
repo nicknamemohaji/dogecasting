@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 16:20:26 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/07 03:01:14 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/08/20 13:58:35 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,13 @@ void check_leak(void)
 
 int	main(void)
 {
-	printf("sizeof %lu \n", sizeof(t_dda));
 	t_image	mlx_image;
 	t_frame	mlx_frame;
 
 	ft_mlx_setup(&mlx_frame, &mlx_image);
 	prototype(&mlx_frame);
 	mlx_frame.draw = &cub3d;
-	mlx_loop_hook(mlx_frame.mlx, ft_mlx_render, &mlx_frame);
+	ft_mlx_render(&mlx_frame);
 	mlx_loop(mlx_frame.mlx);
 }
 

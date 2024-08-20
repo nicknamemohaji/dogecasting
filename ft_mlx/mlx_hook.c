@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 23:05:52 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/11 14:05:28 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/08/20 13:55:59 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_mlx_destroy(t_frame *frame)
 
 int	ft_mlx_event_key(int keycode, t_frame *frame)
 {
-	static const float	rotate_speed = M_PI / 18.0;
+	static const float	rotate_speed = M_PI / 36.0;
 
 	if (keycode == KEYBOARD_ESC)
 		ft_mlx_destroy(frame);
@@ -54,6 +54,7 @@ static void	change_dir(t_frame *frame, double delta)
 {
 	frame->player_dir = ft_vector2d_rotate(frame->player_dir, delta);
 	frame->camera_plane = ft_vector2d_rotate(frame->camera_plane, delta);
+	ft_mlx_render(frame);
 }
 
 static void	change_pos(t_frame *frame, t_dir dir, double speed)
@@ -75,4 +76,5 @@ static void	change_pos(t_frame *frame, t_dir dir, double speed)
 		|| map[(int)new_pos.y][(int)(new_pos.x - MOVE_MAX)] != 0)
 		new_pos = frame->player_pos;
 	frame->player_pos = new_pos;
+	ft_mlx_render(frame);
 }

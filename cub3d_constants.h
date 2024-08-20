@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:03:35 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/11 14:05:22 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/07/28 20:22:56 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define CUB3D_CONSTANTS_H
 
 // screen size
-# define SCREEN_WIDTH 640
-# define SCREEN_HEIGTH 480
+# define SCREEN_WIDTH 2000
+# define SCREEN_HEIGTH 1000
 # define MINIMAP_DIVIDER 8
 # define POV 0.6
 
@@ -24,7 +24,7 @@
 
 // movement constants
 // move: 1/20 tiles
-# define MOVE_SPEED 0.25
+# define MOVE_SPEED 0.1
 # define MOVE_MAX 0.1
 // rotate: 5 degrees
 // fuck norm
