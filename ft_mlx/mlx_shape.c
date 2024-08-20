@@ -6,11 +6,11 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 07:13:31 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/04 08:33:03 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/08/20 14:14:42 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_render.h"
 // include uint64_t
 #include <stdint.h>
 

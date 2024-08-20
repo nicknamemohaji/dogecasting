@@ -6,11 +6,11 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 01:51:03 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/07 03:01:38 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/08/20 14:14:42 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_render.h"
 
 void				cub3d_render(t_frame *frame, const t_map *map,
 						const t_vector2d player_pos,

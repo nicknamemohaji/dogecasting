@@ -6,11 +6,11 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 14:09:07 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/08/20 13:51:23 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/08/20 14:21:56 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_render.h"
 
 void		ft_mlx_setup(t_frame *frame, t_image *img);
 static void	setup_frame(t_frame *frame);
@@ -21,6 +21,7 @@ void		error_exit(const char *msg);
 void	ft_mlx_setup(t_frame *frame, t_image *img)
 {
 	frame->image = img;
+	frame->draw = &cub3d;
 	setup_frame(frame);
 	setup_hook(frame);
 }

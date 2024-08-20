@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yechakim <yechakim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 21:11:06 by yechakim          #+#    #+#             */
-/*   Updated: 2024/07/15 21:13:47 by yechakim         ###   ########.fr       */
+/*   Updated: 2024/08/20 14:22:51 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "cub3d_parser.h"
 #include "get_next_line.h"
 
 void	prototype(t_frame *frame);

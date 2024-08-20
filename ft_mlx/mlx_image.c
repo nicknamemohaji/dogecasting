@@ -6,11 +6,11 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 04:26:10 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/08/20 13:54:52 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/08/20 14:14:42 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_render.h"
 
 void	ft_mlx_image_put(t_frame *frame, t_vector2i pos, int color);
 int		ft_mlx_render(t_frame *frame);

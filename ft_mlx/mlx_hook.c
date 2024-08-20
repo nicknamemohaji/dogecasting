@@ -6,11 +6,11 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 23:05:52 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/08/20 13:55:59 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/08/20 14:14:42 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_render.h"
 
 int			ft_mlx_destroy(t_frame *frame);
 int			ft_mlx_event_key(int keycode, t_frame *frame);
