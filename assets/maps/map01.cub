@@ -1,7 +1,7 @@
-NO ./doge.xpm
-SO ./42.xpm
-WE ./grid.xpm
-EA ./grid.xpm
+NO ./assets/textures/doge.xpm
+SO ./assets/textures/42.xpm
+WE ./assets/textures/grid.xpm
+EA ./assets/textures/grid.xpm
 F 220,100,0
 C 225,30,0
 
@@ -19,3 +19,8 @@ C 225,30,0
 110000011101010111110111100011111
 111101110111010101011110100011111
 111111111111111111111111111111111
+ 
+     11111
+1111100000111
+1111100000001
+     1111111

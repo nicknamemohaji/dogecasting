@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d_render.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/13 12:48:25 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/07 02:19:31 by kyungjle         ###   ########.fr       */
+/*   Created: 2024/08/20 14:15:20 by kyungjle          #+#    #+#             */
+/*   Updated: 2024/08/20 14:15:53 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_RENDER_H
+# define CUB3D_RENDER_H
 
 /***** library import ******/
 // open
@@ -34,8 +34,7 @@
 # include "cub3d_types.h"
 // constants header
 # include "cub3d_constants.h"
-// parser header
-# include "cub3d_parser.h"
+
 /*********** ft_mlx ************/
 // mlx_image.c
 
@@ -100,6 +99,5 @@ void			cub3d_interface(t_frame *frame, t_map const *map,
 
 void			interface_minimap(t_frame *frame, t_map const *map,
 					const t_vector2d player_pos);
-void			interface_fps_counter(t_frame *frame);
 
 #endif

@@ -24,8 +24,8 @@ SOURCES :=	ft_mlx/mlx_setup.c \
 OBJECTS := $(SOURCES:.c=.o)
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -O3 # -g3 -fsanitize=address 
-HEADERS =  -I $(MLX_DIR) -I . -I libft/includes
+CFLAGS = -Wall -Wextra -Werror -O3 #-g3 -fsanitize=address 
+HEADERS =  -I $(MLX_DIR) -I includes -I libft/includes
 INCLUDES =	-L . -l mlx -l m \
 			-framework OpenGL -framework AppKit
 MLX_INCLUDES = -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
@@ -33,7 +33,7 @@ MLX_INCLUDES = -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
 all: $(NAME)
 
 $(NAME): libmlx.dylib $(OBJECTS) libft.a
-	$(CC) $(CFLAGS) $^ -o $(NAME) $(INCLUDES) $(LIBFT_INCLUDE)
+	$(CC) $(CFLAGS) $^ -o $(NAME) $(INCLUDES)
 	
 %.o: %.c
 	@$(CC) $(CFLAGS) $(HEADERS) -c $< -o $*.o

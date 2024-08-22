@@ -6,11 +6,11 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 23:05:52 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/06 23:09:17 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/08/20 14:14:42 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_render.h"
 
 int			ft_mlx_destroy(t_frame *frame);
 int			ft_mlx_event_key(int keycode, t_frame *frame);
@@ -54,10 +54,12 @@ static void	change_dir(t_frame *frame, double delta)
 {
 	frame->player_dir = ft_vector2d_rotate(frame->player_dir, delta);
 	frame->camera_plane = ft_vector2d_rotate(frame->camera_plane, delta);
+	ft_mlx_render(frame);
 }
 
 static void	change_pos(t_frame *frame, t_dir dir, double speed)
 {
+	int					**map;
 	t_vector2d			new_pos;
 	t_vector2d			direction_vector;
 	static const float	degree_90 = M_PI / 2.0f;
@@ -66,10 +68,13 @@ static void	change_pos(t_frame *frame, t_dir dir, double speed)
 	if (dir == DIR_E || dir == DIR_W)
 		direction_vector = ft_vector2d_rotate(direction_vector, degree_90);
 	new_pos = ft_vector2d_add(frame->player_pos, direction_vector);
-	// TODO 대각선으로 움직일 때 벽을 뚫고 지나감
-	if (new_pos.x < 0.0 || new_pos.x >= frame->map.map_w
-		|| new_pos.y < 0.0 || new_pos.y >= frame->map.map_h
-		|| frame->map.map[(int)(new_pos.y)][(int)(new_pos.x)] != 0)
-		return ;
+	map = frame->map.map;
+	if (map[(int)new_pos.y][(int)new_pos.x] != 0
+		|| map[(int)(new_pos.y + MOVE_MAX)][(int)new_pos.x] != 0
+		|| map[(int)(new_pos.y - MOVE_MAX)][(int)new_pos.x] != 0
+		|| map[(int)new_pos.y][(int)(new_pos.x + MOVE_MAX)] != 0
+		|| map[(int)new_pos.y][(int)(new_pos.x - MOVE_MAX)] != 0)
+		new_pos = frame->player_pos;
 	frame->player_pos = new_pos;
+	ft_mlx_render(frame);
 }

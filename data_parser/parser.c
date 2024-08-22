@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yechakim <yechakim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 21:11:06 by yechakim          #+#    #+#             */
-/*   Updated: 2024/08/22 10:32:30 by yechakim         ###   ########.fr       */
+/*   Updated: 2024/08/22 11:22:32 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "cub3d_parser.h"
 #include "get_next_line.h"
 
 #define SPACE 2
@@ -279,12 +280,10 @@ void fill_map(t_frame *frame, t_map *map, char **lines)
 			{
 				printf("dir: %c\n", lines[y_idx][x_idx]);
 				map->map[y_idx][x_idx] = 0;
-				frame->player_pos.x = x_idx;
-				frame->player_pos.y = y_idx;
 				const char *dir = "NSWE";
 				const int start_dir = 90 * (ft_strchr(dir, lines[y_idx][x_idx]) - dir + 1);
-				frame->player_pos.x = x_idx;
-				frame->player_pos.y = y_idx;
+				frame->player_pos.x = x_idx + 0.5;
+				frame->player_pos.y = y_idx + 0.5;
 				frame->player_dir.x = cos(M_PI / 180.0 * start_dir);
 				frame->player_dir.y = -sin(M_PI / 180.0 * start_dir);
 				

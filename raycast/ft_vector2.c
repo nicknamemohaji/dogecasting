@@ -6,11 +6,11 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 17:31:36 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/07 03:08:11 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/08/20 14:14:42 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_render.h"
 
 t_vector2d	ft_vector2d_add(t_vector2d n1, t_vector2d n2);
 t_vector2d	ft_vector2d_mul(t_vector2d vec, double scalar);
