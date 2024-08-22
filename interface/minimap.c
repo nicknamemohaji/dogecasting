@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 07:29:57 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/08/20 14:14:42 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/08/22 10:56:43 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@ void	interface_minimap(t_frame *frame, t_map const *map,
 		x = -1;
 		while (++x < map->map_w)
 		{
-			if (map->map[y][x] != 0)
+			if (map->map[y][x] == 0)
 				color = 0xffffff;
+			else if (map->map[y][x] == 1)
+				color = 0x330033;
 			else
 				color = 0x333333;
 			ft_mlx_draw_rectangle(frame, minimap_size,

@@ -6,7 +6,7 @@
 /*   By: yechakim <yechakim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 17:01:47 by yechakim          #+#    #+#             */
-/*   Updated: 2024/07/15 21:11:29 by yechakim         ###   ########.fr       */
+/*   Updated: 2024/07/15 21:51:11 by yechakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,15 @@
 typedef char *t_metadata_key;
 typedef struct s_metadata
 {
-	char *north;
-	char *south;
-	char *west;
-	char *east;
-	char *floor_color;
-	char *ceiling_color;
+	char	*dir[TEXTURE_AMOUNT];
+	int		colors[2];
 } t_metadata;
+
+typedef enum e_color
+{
+	FLOOR,
+	CEILING
+} t_color;
 
 /* API */
 void	initialize_data(t_frame *frame, int argc, char **argv);

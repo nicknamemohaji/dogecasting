@@ -30,11 +30,6 @@ INCLUDES =	-L . -l mlx -l m \
 			-framework OpenGL -framework AppKit
 MLX_INCLUDES = -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
 
-ifdef PARSER
-	CFLAGS += -D PARSER=1
-endif
-
-
 all: $(NAME)
 
 $(NAME): libmlx.dylib $(OBJECTS) libft.a
