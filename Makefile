@@ -24,16 +24,11 @@ SOURCES :=	ft_mlx/mlx_setup.c \
 OBJECTS := $(SOURCES:.c=.o)
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -O3 #-g3 -fsanitize=address 
+CFLAGS = -Wall -Wextra -Werror -O3 # -g3 -fsanitize=address 
 HEADERS =  -I $(MLX_DIR) -I . -I libft/includes
 INCLUDES =	-L . -l mlx -l m \
 			-framework OpenGL -framework AppKit
 MLX_INCLUDES = -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
-
-ifdef PARSER
-	CFLAGS += -D PARSER=1
-endif
-
 
 all: $(NAME)
 
