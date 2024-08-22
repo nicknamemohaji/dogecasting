@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:03:35 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/04 04:36:39 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/07/06 22:48:18 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,17 @@
 # define CUB3D_CONSTANTS_H
 
 // screen size
-# define SCREEN_WIDTH 640
-# define SCREEN_HEIGTH 480
+# define SCREEN_WIDTH 2000
+# define SCREEN_HEIGTH 1000
 # define MINIMAP_DIVIDER 8
+# define POV 0.6
 
 // include PI
 # include <math.h>
 
 // movement constants
 // move: 1/20 tiles
-# define MOVE_SPEED 0.05
+# define MOVE_SPEED 0.1
 // rotate: 5 degrees
 // fuck norm
 // # define ROTATE_SPEED M_PI / 36.0
@@ -55,6 +56,7 @@
 // constants for direction
 typedef enum e_dir
 {
+	UNDEFINED = -1,
 	DIR_N = 0,
 	DIR_S = 1,
 	DIR_W = 2,

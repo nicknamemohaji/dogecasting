@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yechakim <yechakim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/13 16:20:26 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/11 14:48:35 by yechakim         ###   ########.fr       */
+/*   Created: 2023/10/04 22:01:15 by yechakim          #+#    #+#             */
+/*   Updated: 2023/10/06 09:04:53 by yechakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-void prototype(t_frame *frame);
-void check_leak(void)
-{
-	system("leaks cub3D");
-}
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+{	
+	size_t	src_len;
 
-int	main(int argc, char **argv)
-{
-	printf("sizeof %lu \n", sizeof(t_dda));
-	t_image	mlx_image;
-	t_frame	mlx_frame;
-	
-	ft_mlx_setup(&mlx_frame, &mlx_image);
-	initialize_data(&mlx_frame, argc, argv);
-	mlx_frame.draw = &cub3d;
-	mlx_loop_hook(mlx_frame.mlx, ft_mlx_render, &mlx_frame);
-	mlx_loop(mlx_frame.mlx);
+	src_len = ft_strlen(src);
+	if (dstsize == 0)
+		return (src_len);
+	while (dstsize > 1 && *src != '\0')
+	{
+		*dst = *src;
+		dst++;
+		src++;
+		dstsize--;
+	}
+	*dst = '\0';
+	return (src_len);
 }

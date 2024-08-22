@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_free_strs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yechakim <yechakim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/13 16:20:26 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/11 14:48:35 by yechakim         ###   ########.fr       */
+/*   Created: 2024/02/21 03:10:47 by yechakim          #+#    #+#             */
+/*   Updated: 2024/04/17 15:51:07 by yechakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-void prototype(t_frame *frame);
-void check_leak(void)
+/**
+ * @brief free all strings in strs and free strs
+ * 
+ * @param strs it is a null-terminated array of strings
+ * @return void* return NULL
+*/
+void	*ft_free_strs(char **strs)
 {
-	system("leaks cub3D");
-}
+	char	**str_addr;
 
-int	main(int argc, char **argv)
-{
-	printf("sizeof %lu \n", sizeof(t_dda));
-	t_image	mlx_image;
-	t_frame	mlx_frame;
-	
-	ft_mlx_setup(&mlx_frame, &mlx_image);
-	initialize_data(&mlx_frame, argc, argv);
-	mlx_frame.draw = &cub3d;
-	mlx_loop_hook(mlx_frame.mlx, ft_mlx_render, &mlx_frame);
-	mlx_loop(mlx_frame.mlx);
+	str_addr = strs;
+	while (*strs)
+	{
+		free(*strs);
+		strs++;
+	}
+	free(str_addr);
+	return (NULL);
 }

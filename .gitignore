@@ -54,3 +54,6 @@ dkms.conf
 # etc
 .vscode/
 .DS_Store
+
+# unrequired subject file ext
+.md

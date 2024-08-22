@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   is_ext.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yechakim <yechakim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/13 16:20:26 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/11 14:48:35 by yechakim         ###   ########.fr       */
+/*   Created: 2024/07/05 17:01:28 by yechakim          #+#    #+#             */
+/*   Updated: 2024/08/20 10:38:03 by yechakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_parser.h"
+#include <stdio.h>
 
-void prototype(t_frame *frame);
-void check_leak(void)
+int	is_ext(char *file, char *ext)
 {
-	system("leaks cub3D");
-}
+	char	*file_ext;
 
-int	main(int argc, char **argv)
-{
-	printf("sizeof %lu \n", sizeof(t_dda));
-	t_image	mlx_image;
-	t_frame	mlx_frame;
-	
-	ft_mlx_setup(&mlx_frame, &mlx_image);
-	initialize_data(&mlx_frame, argc, argv);
-	mlx_frame.draw = &cub3d;
-	mlx_loop_hook(mlx_frame.mlx, ft_mlx_render, &mlx_frame);
-	mlx_loop(mlx_frame.mlx);
+	if (!file || !ext)
+		return (0);
+	file_ext = ft_strrchr(file, '.');
+	if (!file_ext)
+		return (0);
+	return (ft_strncmp(file_ext, ext, ft_strlen(ext) + 1) == 0);
 }

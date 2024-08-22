@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yechakim <yechakim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/13 16:20:26 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/11 14:48:35 by yechakim         ###   ########.fr       */
+/*   Created: 2023/10/04 22:02:29 by yechakim          #+#    #+#             */
+/*   Updated: 2023/10/06 00:41:41 by yechakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-void prototype(t_frame *frame);
-void check_leak(void)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	system("leaks cub3D");
-}
+	size_t			i;
+	unsigned char	*us1;
+	unsigned char	*us2;
 
-int	main(int argc, char **argv)
-{
-	printf("sizeof %lu \n", sizeof(t_dda));
-	t_image	mlx_image;
-	t_frame	mlx_frame;
-	
-	ft_mlx_setup(&mlx_frame, &mlx_image);
-	initialize_data(&mlx_frame, argc, argv);
-	mlx_frame.draw = &cub3d;
-	mlx_loop_hook(mlx_frame.mlx, ft_mlx_render, &mlx_frame);
-	mlx_loop(mlx_frame.mlx);
+	us1 = (unsigned char *)s1;
+	us2 = (unsigned char *)s2;
+	i = 0;
+	if (n == 0)
+		return (0);
+	while ((us1[i] && us2[i]) && i != n)
+	{
+		if (us1[i] != us2[i])
+			break ;
+	i++;
+	}
+	if (i == n)
+		i--;
+	return (us1[i] - us2[i]);
 }

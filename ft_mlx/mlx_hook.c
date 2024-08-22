@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 23:05:52 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/04 03:28:45 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/07/06 23:09:17 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	ft_mlx_event_key(int keycode, t_frame *frame)
 static void	change_dir(t_frame *frame, double delta)
 {
 	frame->player_dir = ft_vector2d_rotate(frame->player_dir, delta);
-	frame->camera_dir = ft_vector2d_rotate(frame->camera_dir, delta);
+	frame->camera_plane = ft_vector2d_rotate(frame->camera_plane, delta);
 }
 
 static void	change_pos(t_frame *frame, t_dir dir, double speed)

@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yechakim <yechakim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/13 16:20:26 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/11 14:48:35 by yechakim         ###   ########.fr       */
+/*   Created: 2023/10/04 22:00:49 by yechakim          #+#    #+#             */
+/*   Updated: 2023/10/06 09:24:40 by yechakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-void prototype(t_frame *frame);
-void check_leak(void)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	system("leaks cub3D");
-}
+	int		s1_len;
+	int		s2_len;
+	char	*ret;
 
-int	main(int argc, char **argv)
-{
-	printf("sizeof %lu \n", sizeof(t_dda));
-	t_image	mlx_image;
-	t_frame	mlx_frame;
-	
-	ft_mlx_setup(&mlx_frame, &mlx_image);
-	initialize_data(&mlx_frame, argc, argv);
-	mlx_frame.draw = &cub3d;
-	mlx_loop_hook(mlx_frame.mlx, ft_mlx_render, &mlx_frame);
-	mlx_loop(mlx_frame.mlx);
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	ret = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
+	if (ret == NULL)
+		return (NULL);
+	ft_strlcpy(ret, s1, s1_len + 1);
+	ft_strlcpy((ret + s1_len), s2, s2_len + 1);
+	return (ret);
 }

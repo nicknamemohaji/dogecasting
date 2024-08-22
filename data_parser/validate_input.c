@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   validate_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yechakim <yechakim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/13 16:20:26 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/11 14:48:35 by yechakim         ###   ########.fr       */
+/*   Created: 2024/07/10 14:35:57 by yechakim          #+#    #+#             */
+/*   Updated: 2024/07/15 21:10:41 by yechakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_parser.h"
 
-void prototype(t_frame *frame);
-void check_leak(void)
+t_bool	has_only_one_cub3d_file(int argc, char **argv)
 {
-	system("leaks cub3D");
-}
-
-int	main(int argc, char **argv)
-{
-	printf("sizeof %lu \n", sizeof(t_dda));
-	t_image	mlx_image;
-	t_frame	mlx_frame;
-	
-	ft_mlx_setup(&mlx_frame, &mlx_image);
-	initialize_data(&mlx_frame, argc, argv);
-	mlx_frame.draw = &cub3d;
-	mlx_loop_hook(mlx_frame.mlx, ft_mlx_render, &mlx_frame);
-	mlx_loop(mlx_frame.mlx);
+	if (argc != 2)
+		throw_parse_error("Invalid number of arguments\n");
+	if (!is_ext(argv[1], EXT))
+		throw_parse_error("Invalid file extension\n");
+	if (is_exist_file(argv[1]) == FALSE)
+		throw_parse_error("File does not exist\n");
+	return (TRUE);
 }
