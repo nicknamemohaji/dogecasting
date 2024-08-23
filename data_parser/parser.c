@@ -6,7 +6,7 @@
 /*   By: yechakim <yechakim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 21:11:06 by yechakim          #+#    #+#             */
-/*   Updated: 2024/08/22 21:27:22 by yechakim         ###   ########.fr       */
+/*   Updated: 2024/08/23 12:52:45 by yechakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 #define SPACE 2
 
 void	validate_map(t_frame *frame, t_map *map);
-void	prototype(t_frame *frame);
 t_bool	is_fullfilled(t_metadata *metadata);
 
 int	get_file(char *filename)
@@ -36,13 +35,16 @@ t_bool	fill_direction(t_metadata *info, t_dir dir, char *line)
 
 	while (line && *line == ' ')
 		line++;
-	if (is_ext(line, ".xpm") == FALSE)
+	if (is_ext(line, VALID_TEXTURE_EXT) == FALSE)
 		throw_parse_error("Invalid file extension\n");
 	fd = open(line, O_RDONLY);
 	if (fd < 0)
-		throw_parse_error("File is not invalid\n");
+	{
+		printf("err in open\n");
+		throw_parse_error(NULL);
+	}
 	if (info->dir[dir])
-		throw_parse_error("Duplicated texture\n");
+		throw_parse_error(ERR_DUPLICATE_METADATA);
 	info->dir[dir] = ft_strdup(line);
 	close(fd);
 	return (TRUE);
@@ -59,7 +61,7 @@ t_bool	try_fill_direction(t_metadata *info, char *line)
 		if (ft_strncmp(dir_keys[i], line, DIR_KEY_LEN) == 0)
 		{
 			if (info->dir[i] != NULL)
-				throw_parse_error("Duplicated Texture\n");
+				throw_parse_error(ERR_DUPLICATE_METADATA);
 			fill_direction(info, i, line + DIR_KEY_LEN);
 			return (TRUE);
 		}
@@ -70,34 +72,29 @@ t_bool	try_fill_direction(t_metadata *info, char *line)
 
 t_bool	valid_color_format(char *colors)
 {
-	char	*temp;
 	int		color_amount;
 
-	temp = colors;
 	color_amount = 0;
-	while (temp && *temp)
+	while (colors && *colors)
 	{
-		while (temp && *temp == ' ')
-			temp++;
-		if (!temp)
-			throw_parse_error("Invalid color format with space\n");
-		if (ft_isdigit(*temp) == FALSE)
-			throw_parse_error("Invalid color format with digit\n");
+		while (colors && *colors == ' ')
+			colors++;
+		if (!colors)
+			throw_parse_error(ERR_COLOR_FORMAT);
+		if (ft_isdigit(*colors) == FALSE)
+			throw_parse_error(ERR_COLOR_CHAR);
 		color_amount++;
-		while (temp && ft_isdigit(*temp) == TRUE)
-			temp++;
-		if (color_amount != 3 && !temp)
-			throw_parse_error("Invalid color format with amount color_amount\n");
-		if (temp && *temp != ',' && color_amount != 3)
-		{
-			throw_parse_error("Invalid color format with ','\n");
-		}
-		printf("temp: %s\n", temp);
-		if (temp && *temp)
-			temp++;
+		while (colors && ft_isdigit(*colors) == TRUE)
+			colors++;
+		if (color_amount != 3 && !colors)
+			throw_parse_error(ERR_COLOR_FORMAT);
+		if (colors && *colors != ',' && color_amount != 3)
+			throw_parse_error(ERR_COLOR_FORMAT_WITH_DELIMITER);
+		if (colors && *colors)
+			colors++;
 	}
 	if (color_amount != 3)
-		throw_parse_error("Invalid color format\n");
+		throw_parse_error(ERR_COLOR_FORMAT);
 	return (TRUE);
 }
 
@@ -112,14 +109,14 @@ void	fill_color(t_metadata *info, int key, char *colors)
 	color = 0;
 	printf("colors: %s\n", colors);
 	if (valid_color_format(colors) == FALSE)
-		throw_parse_error("Invalid color format\n");
+		throw_parse_error(ERR_COLOR_FORMAT);
 	while (colors && color_cnt < 3)
 	{
 		while (colors && *colors == ' ')
 			colors++;
 		current_color = ft_atoi(colors);
 		if (!(0 <= current_color && current_color <= 255))
-			throw_parse_error("Invalid color value range\n");
+			throw_parse_error(ERR_COLOR_RANGE);
 		info->colors[key] += current_color << rgb[color_cnt];
 		color_cnt++;
 		colors = ft_strchr(colors, ',');
@@ -140,7 +137,6 @@ t_bool	try_fill_color(t_metadata *info, char *line)
 			return (fill_color(info, i, line + COLOR_KEY_LEN), TRUE);
 		i++;
 	}
-	printf("fill color failed with line: %s\n", line);
 	return (FALSE);
 }
 
@@ -166,30 +162,27 @@ t_bool	read_metadata(t_metadata *metadata, int fd)
 
 	while (TRUE)
 	{
+		errno = 0;
 		line = get_next_line(fd);
+		if (errno != 0)
+		{
+			printf("err in get_next_line\n");
+			throw_parse_error(NULL);
+		}
 		if (!line)
 			return (FALSE);
 		trimedline = ft_strtrim(line, " \n");
-		printf("line: %s\n", line);
-		printf("trimedline: %s\n", trimedline);
 		free(line);
 		if (!trimedline)
-			throw_parse_error("Failed to allocate memory\n");
-		if (*trimedline == '\0')
+			throw_parse_error(NULL);
+		if (*trimedline != '\0')
 		{
-			free(trimedline);
-			continue ;
-		}
-		if (ft_isdigit(trimedline[0])
-			|| ft_strchr("NSWEFC", trimedline[0]) == NULL)
-			return (FALSE);
-		if (parse_metadata(metadata, trimedline) == FALSE)
-		{
-			printf("here\n");
-			return (FALSE);
+			if (ft_strchr("NSWEFC", trimedline[0]) == NULL)
+				return (FALSE);
+			if (parse_metadata(metadata, trimedline) == FALSE)
+				return (FALSE);
 		}
 		free(trimedline);
-		dbg_metadata(metadata);
 		if (is_fullfilled(metadata))
 			return (TRUE);
 	}
@@ -200,23 +193,27 @@ char	*read_map_lines(int file)
 {
 	char	*line;
 	char	*map_str;
-	char	*temp;
 
-	map_str = NULL;
-	while (TRUE)
+	line = get_next_line(file);
+	map_str = ft_strdup(line);
+	while (TRUE && map_str)
 	{
-		line = get_next_line(file);
+		if (errno != 0)
+			throw_parse_error(NULL);
 		if (!line)
 			break ;
-		if (!map_str)
-			map_str = ft_strdup(line);
-		else
+		if (*line == '\n')
 		{
-			temp = ft_strjoin(map_str, line);
-			free(map_str);
-			map_str = temp;
+			free(line);
+			line = ft_strdup(" \n");
+			if (!line)
+				throw_parse_error(NULL);
 		}
+		map_str = ft_strjoin_and_free(map_str, line, FREE_S1);
+		if (!map_str)
+			throw_parse_error(NULL);
 		free(line);
+		line = get_next_line(file);
 	}
 	return (map_str);
 }
@@ -242,45 +239,54 @@ void	fill_mapsize(t_map *map, char **lines)
 	map->map_h = i;
 }
 
-void	fill_map(t_frame *frame, t_map *map, char **lines)
+void	fill_player_pos(t_frame *frame, int x, int y, int start_dir)
+{
+	frame->player_pos.x = x + 0.5;
+	frame->player_pos.y = y + 0.5;
+	frame->player_dir.x = cos(M_PI / 180.0 * start_dir);
+	frame->player_dir.y = -sin(M_PI / 180.0 * start_dir);
+	frame->camera_plane.x = POV * sin(M_PI / 180.0 * start_dir);
+	frame->camera_plane.y = POV * cos(M_PI / 180.0 * start_dir);
+}
+
+void	fill_coordinate(t_frame *frame,
+	t_map *map, char **lines, t_vector2i pos)
 {
 	const char	*dir = "NSWE";
+	int			start_dir;
+
+	if (lines[pos.y][pos.x] == ' ')
+			map->map[pos.y][pos.x] = SPACE;
+	else if (ft_strchr("01", lines[pos.y][pos.x]))
+				map->map[pos.y][pos.x] = lines[pos.y][pos.x] - '0';
+	else if (ft_strchr(dir, lines[pos.y][pos.x]) != NULL)
+	{
+		map->map[pos.y][pos.x] = 0;
+		start_dir = 90 * (ft_strchr(dir, lines[pos.y][pos.x]) - dir + 1);
+		fill_player_pos(frame, pos.x, pos.y, start_dir);
+	}
+	else
+		throw_parse_error("Invalid map character\n");
+}
+
+void	fill_map(t_frame *frame, t_map *map, char **lines)
+{
 	int			y_idx;
 	int			x_idx;
 	int			line_len;
-	int			start_dir;
 
 	y_idx = 0;
 	while (lines[y_idx])
 	{
-		printf("line: %s\n", lines[y_idx]);
 		map->map[y_idx] = malloc(map->map_w * sizeof(int));
 		if (!map->map[y_idx])
-			throw_parse_error("Failed to allocate memory\n");
+			throw_parse_error(NULL);
 		ft_memset(map->map[y_idx], -1, map->map_w * sizeof(int));
 		x_idx = 0;
 		line_len = ft_strlen(lines[y_idx]);
 		while (x_idx < line_len)
 		{
-			if (lines[y_idx][x_idx] == ' ')
-				map->map[y_idx][x_idx] = SPACE;
-			else if (ft_strchr("01", lines[y_idx][x_idx]))
-				map->map[y_idx][x_idx] = lines[y_idx][x_idx] - '0';
-			else if (ft_strchr(dir, lines[y_idx][x_idx]) != NULL)
-			{
-				printf("dir: %c\n", lines[y_idx][x_idx]);
-				map->map[y_idx][x_idx] = 0;
-				start_dir = 90
-					* (ft_strchr(dir, lines[y_idx][x_idx]) - dir + 1);
-				frame->player_pos.x = x_idx + 0.5;
-				frame->player_pos.y = y_idx + 0.5;
-				frame->player_dir.x = cos(M_PI / 180.0 * start_dir);
-				frame->player_dir.y = -sin(M_PI / 180.0 * start_dir);
-				frame->camera_plane.x = POV * sin(M_PI / 180.0 * start_dir);
-				frame->camera_plane.y = POV * cos(M_PI / 180.0 * start_dir);
-			}
-			else
-				throw_parse_error("Invalid map character\n");
+			fill_coordinate(frame, map, lines, (t_vector2i){x_idx, y_idx});
 			x_idx++;
 		}
 		while (x_idx < map->map_w)
@@ -290,6 +296,32 @@ void	fill_map(t_frame *frame, t_map *map, char **lines)
 		}
 		y_idx++;
 	}
+}
+
+t_bool	has_zero_in_map_outline(t_map *map, int y, int x)
+{
+	return (map->map[y][x] == 0
+		&& (y == 0 || y == map->map_h - 1 || x == 0 || x == map->map_w -1));
+}
+
+t_bool	has_space_around_zero(t_map *map, int y, int x)
+{
+	return (map->map[y][x] == 0 &&
+				(map->map[y - 1][x] > 1 || map->map[y + 1][x] > 1
+					|| map->map[y][x - 1] > 1 || map->map[y][x + 1] > 1));
+}
+
+t_bool	has_space_around_player_pos(t_map *map, int y, int x)
+{
+	return (map->map[y - 1][x] > 1 || map->map[y + 1][x - 1] > 1
+					|| map->map[y][x - 1] > 1 || map->map[y][x + 1] > 1);
+}
+
+t_bool	player_pos_in_outline(t_map *map, t_vector2i pos, t_vector2i curr)
+{
+	return (curr.x == pos.x && curr.y == pos.y
+		&& (pos.x == 0 || pos.x == map->map_w - 1
+			|| pos.y == 0 || pos.y == map->map_h - 1));
 }
 
 void	validate_map(t_frame *frame, t_map *map)
@@ -303,31 +335,18 @@ void	validate_map(t_frame *frame, t_map *map)
 		j = 0;
 		while (j < map->map_w)
 		{
-			if (map->map[i][j] == 0 && (i == 0 || i == map->map_h - 1
-				|| j == 0 || j == map->map_w -1))
+			if (has_zero_in_map_outline(map, i, j)
+				|| has_space_around_zero(map, i, j))
+				throw_parse_error(ERR_MAP ERR_MAP_SURROUND);
+			if (player_pos_in_outline(map, (t_vector2i){frame->player_pos.x,
+					frame->player_pos.y}, (t_vector2i){j, i}))
 			{
-				printf("pos: %d %d\n", i, j);
-				throw_parse_error("Invalid map: \
-					Not surrounded by walls with endpoints\n");
-			}
-			if (map->map[i][j] == 0 &&
-				(map->map[i - 1][j] > 1 || map->map[i + 1][j] > 1
-					|| map->map[i][j - 1] > 1 || map->map[i][j + 1] > 1))
-				throw_parse_error("Invalid map: \
-					Not surrounded by walls with inner pos\n");
-			if (i == frame->player_pos.y && j == frame->player_pos.x
-				&& (i == 0 || i == map->map_h - 1
-					|| j == 0 || j == map->map_w -1))
-			{
-				printf("pos: %d %d\n", i, j);
 				throw_parse_error("Invalid map: \
 				Player Position is not surrounded by walls 1\n");
 			}
 			if (i == frame->player_pos.y && j == frame->player_pos.x
-				&& (map->map[i - 1][j] > 1 || map->map[i + 1][j - 1] > 1
-					|| map->map[i][j - 1] > 1 || map->map[i][j + 1] > 1))
+				&& has_space_around_player_pos(map, i, j))
 			{
-				printf("pos: %d %d\n", i, j);
 				throw_parse_error("Invalid map: \
 					Player Position is not surrounded by walls 2\n");
 			}
@@ -382,6 +401,18 @@ void	dbg_map(t_map *map)
 	}
 }
 
+void	set_textures(t_frame *frame, t_metadata *metadata)
+{
+	frame->map.textures[DIR_N]
+		= cub3d_texture_create(frame, metadata->dir[DIR_N]);
+	frame->map.textures[DIR_E]
+		= cub3d_texture_create(frame, metadata->dir[DIR_E]);
+	frame->map.textures[DIR_W]
+		= cub3d_texture_create(frame, metadata->dir[DIR_W]);
+	frame->map.textures[DIR_S]
+		= cub3d_texture_create(frame, metadata->dir[DIR_S]);
+}
+
 void	initialize_data(t_frame *frame, int argc, char **argv)
 {
 	t_metadata	*metadata;
@@ -397,20 +428,8 @@ void	initialize_data(t_frame *frame, int argc, char **argv)
 		throw_parse_error("Failed to read metadata\n");
 	if (!read_map(frame, &frame->map, file_descripter))
 		throw_parse_error("Failed to read map\n");
-	frame->map.textures[DIR_N]
-		= cub3d_texture_create(frame, metadata->dir[DIR_N]);
-	frame->map.textures[DIR_E]
-		= cub3d_texture_create(frame, metadata->dir[DIR_E]);
-	frame->map.textures[DIR_W]
-		= cub3d_texture_create(frame, metadata->dir[DIR_W]);
-	frame->map.textures[DIR_S]
-		= cub3d_texture_create(frame, metadata->dir[DIR_S]);
+	set_textures(frame, metadata);
 	dbg_map(&frame->map);
-	/* if(!read_map(map, argv[1], file))
-		throw_parse_error("Failed to read map\n");
-	set_texture(metadata, map);
-	set_color(metadata, map);
-	*/
 }
 
 t_bool	is_fullfilled(t_metadata *metadata)

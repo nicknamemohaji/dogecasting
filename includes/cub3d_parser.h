@@ -6,7 +6,7 @@
 /*   By: yechakim <yechakim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 17:01:47 by yechakim          #+#    #+#             */
-/*   Updated: 2024/07/15 21:51:11 by yechakim         ###   ########.fr       */
+/*   Updated: 2024/08/22 23:14:09 by yechakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,6 @@
 # include <sys/fcntl.h>
 
 /** CONSTNATS FOR PARSER */
-# define EXT ".cub"
-# define ERROR_MSG "Error\n"
-# define TEXTURE_AMOUNT 4 
-# define NORTH "NO "
-# define SOUTH "SO "
-# define WEST "WE "
-# define EAST "EA "
-# define FLOOR_COLOR "F "
-# define CEILING_COLOR "C "
-# define DIR_KEY_LEN 3
-# define COLOR_KEY_LEN 2
-
-
 typedef char *t_metadata_key;
 typedef struct s_metadata
 {

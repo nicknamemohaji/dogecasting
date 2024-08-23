@@ -6,7 +6,7 @@
 /*   By: yechakim <yechakim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 14:35:57 by yechakim          #+#    #+#             */
-/*   Updated: 2024/07/15 21:10:41 by yechakim         ###   ########.fr       */
+/*   Updated: 2024/08/23 10:48:45 by yechakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_bool	has_only_one_cub3d_file(int argc, char **argv)
 {
 	if (argc != 2)
 		throw_parse_error("Invalid number of arguments\n");
-	if (!is_ext(argv[1], EXT))
+	if (!is_ext(argv[1], MAP_FILE_EXT))
 		throw_parse_error("Invalid file extension\n");
 	if (is_exist_file(argv[1]) == FALSE)
 		throw_parse_error("File does not exist\n");
