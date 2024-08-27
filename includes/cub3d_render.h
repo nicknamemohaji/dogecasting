@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:15:20 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/08/20 14:15:53 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/08/27 14:17:35 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,6 @@ void			error_exit(const char *msg);
 
 int				ft_mlx_destroy(t_frame *frame);
 int				ft_mlx_event_key(int keycode, t_frame *frame);
-
-// mlx_hook2.c
-
-int				ft_mlx_event_mouse(int button, int x, int y, t_frame *frame);
 
 // mlx_shape.c
 

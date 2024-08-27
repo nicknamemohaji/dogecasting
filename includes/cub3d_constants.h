@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_constants.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yechakim <yechakim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:03:35 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/08/23 09:56:30 by yechakim         ###   ########.fr       */
+/*   Updated: 2024/08/27 14:19:11 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ typedef enum e_layer
 	LAYER_MAP = 3,
 	LAYER_RAY = 4
 }	t_layer;
-
 
 # define MAP_FILE_EXT ".cub"
 # define VALID_TEXTURE_EXT ".xpm"
