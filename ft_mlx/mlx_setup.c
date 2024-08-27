@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_setup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yechakim <yechakim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 14:09:07 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/08/27 18:29:30 by yechakim         ###   ########seoul.kr  */
+/*   Updated: 2024/08/27 18:45:50 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,6 @@ static void	setup_hook(t_frame *frame)
 
 void	error_exit(const char *msg)
 {
-	ft_putstr_fd(2, msg);
+	ft_putstr_fd((char *)msg, 2);
 	exit(EXIT_FAILURE);
 }
