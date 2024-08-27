@@ -29,6 +29,9 @@
 # define ERR_COLOR_FORMAT_WITH_DELIMITER "Invalid color with ','\n"
 
 # define ERR_MAP "Invalid map: "
+# define ERR_MAP_DUP_PLAYER "Duplicate player position\n"
+# define ERR_MAP_PLAYER "Invalid player position\n"
+# define ERR_MAP_NO_PLAYER "No player position\n"
 # define ERR_MAP_CHAR "contains invalid character\n"
 # define ERR_MAP_SURROUND "map is not surrounded by walls\n"
 

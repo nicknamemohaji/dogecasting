@@ -6,7 +6,7 @@
 /*   By: yechakim <yechakim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 21:11:06 by yechakim          #+#    #+#             */
-/*   Updated: 2024/08/23 12:52:45 by yechakim         ###   ########.fr       */
+/*   Updated: 2024/08/27 10:19:40 by yechakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_bool	fill_direction(t_metadata *info, t_dir dir, char *line)
 	while (line && *line == ' ')
 		line++;
 	if (is_ext(line, VALID_TEXTURE_EXT) == FALSE)
-		throw_parse_error("Invalid file extension\n");
+		throw_parse_error(ERR_EXT);
 	fd = open(line, O_RDONLY);
 	if (fd < 0)
 	{
@@ -107,7 +107,6 @@ void	fill_color(t_metadata *info, int key, char *colors)
 
 	color_cnt = 0;
 	color = 0;
-	printf("colors: %s\n", colors);
 	if (valid_color_format(colors) == FALSE)
 		throw_parse_error(ERR_COLOR_FORMAT);
 	while (colors && color_cnt < 3)
@@ -145,16 +144,6 @@ t_bool	parse_metadata(t_metadata *info, char *line)
 	return (try_fill_direction(info, line) || try_fill_color(info, line));
 }
 
-void	dbg_metadata(t_metadata *metadata)
-{
-	printf("NORTH: %s\n", metadata->dir[DIR_N]);
-	printf("SOUTH: %s\n", metadata->dir[DIR_S]);
-	printf("WEST: %s\n", metadata->dir[DIR_W]);
-	printf("EAST: %s\n", metadata->dir[DIR_E]);
-	printf("FLOOR: %d\n", metadata->colors[FLOOR]);
-	printf("CEILING: %d\n", metadata->colors[CEILING]);
-}
-
 t_bool	read_metadata(t_metadata *metadata, int fd)
 {
 	char	*line;
@@ -165,10 +154,7 @@ t_bool	read_metadata(t_metadata *metadata, int fd)
 		errno = 0;
 		line = get_next_line(fd);
 		if (errno != 0)
-		{
-			printf("err in get_next_line\n");
 			throw_parse_error(NULL);
-		}
 		if (!line)
 			return (FALSE);
 		trimedline = ft_strtrim(line, " \n");
@@ -241,12 +227,17 @@ void	fill_mapsize(t_map *map, char **lines)
 
 void	fill_player_pos(t_frame *frame, int x, int y, int start_dir)
 {
+	static int player_count = 0;
+
+	if (player_count > 0)
+		throw_parse_error(ERR_MAP ERR_DUP_PLAYER);
 	frame->player_pos.x = x + 0.5;
 	frame->player_pos.y = y + 0.5;
 	frame->player_dir.x = cos(M_PI / 180.0 * start_dir);
 	frame->player_dir.y = -sin(M_PI / 180.0 * start_dir);
 	frame->camera_plane.x = POV * sin(M_PI / 180.0 * start_dir);
 	frame->camera_plane.y = POV * cos(M_PI / 180.0 * start_dir);
+	player_count++;
 }
 
 void	fill_coordinate(t_frame *frame,
@@ -266,7 +257,7 @@ void	fill_coordinate(t_frame *frame,
 		fill_player_pos(frame, pos.x, pos.y, start_dir);
 	}
 	else
-		throw_parse_error("Invalid map character\n");
+		throw_parse_error(ERR_MAP ERR_MAP_CHAR);
 }
 
 void	fill_map(t_frame *frame, t_map *map, char **lines)
@@ -276,6 +267,8 @@ void	fill_map(t_frame *frame, t_map *map, char **lines)
 	int			line_len;
 
 	y_idx = 0;
+	frame->player_pos.x = -1;
+	frame->player_pos.y = -1;
 	while (lines[y_idx])
 	{
 		map->map[y_idx] = malloc(map->map_w * sizeof(int));
@@ -285,15 +278,9 @@ void	fill_map(t_frame *frame, t_map *map, char **lines)
 		x_idx = 0;
 		line_len = ft_strlen(lines[y_idx]);
 		while (x_idx < line_len)
-		{
-			fill_coordinate(frame, map, lines, (t_vector2i){x_idx, y_idx});
-			x_idx++;
-		}
+			fill_coordinate(frame, map, lines, (t_vector2i){x_idx++, y_idx});
 		while (x_idx < map->map_w)
-		{
-			map->map[y_idx][x_idx] = SPACE;
-			x_idx++;
-		}
+			map->map[y_idx][x_idx++] = SPACE;
 		y_idx++;
 	}
 }
@@ -340,16 +327,10 @@ void	validate_map(t_frame *frame, t_map *map)
 				throw_parse_error(ERR_MAP ERR_MAP_SURROUND);
 			if (player_pos_in_outline(map, (t_vector2i){frame->player_pos.x,
 					frame->player_pos.y}, (t_vector2i){j, i}))
-			{
-				throw_parse_error("Invalid map: \
-				Player Position is not surrounded by walls 1\n");
-			}
+				throw_parse_error(ERR_MAP ERR_MAP_PLAYER);
 			if (i == frame->player_pos.y && j == frame->player_pos.x
 				&& has_space_around_player_pos(map, i, j))
-			{
-				throw_parse_error("Invalid map: \
-					Player Position is not surrounded by walls 2\n");
-			}
+				throw_parse_error(ERR_MAP ERR_MAP_PLAYER);
 			j++;
 		}
 		i++;
@@ -368,14 +349,16 @@ t_bool	read_map(t_frame *frame, t_map *map, int file)
 		return (FALSE);
 	lines = ft_split(map_str, '\n');
 	if (!lines)
-		throw_parse_error("Failed to allocate memory\n");
+		throw_parse_error(NULL);
 	free(map_str);
 	fill_mapsize(map, lines);
 	map->map = malloc(map->map_h * sizeof(int *));
 	if (!map->map)
-		throw_parse_error("Failed to allocate memory\n");
+		throw_parse_error(NULL);
 	fill_map(frame, map, lines);
 	ft_free_strs(lines);
+	if (frame->player_pos.x == -1 || frame->player_pos.y == -1)
+		throw_parse_error(ERR_MAP ERR_MAP_NO_PLAYER);
 	validate_map(frame, map);
 	return (TRUE);
 }
@@ -386,8 +369,6 @@ void	dbg_map(t_map *map)
 	int	j;
 
 	i = 0;
-	printf("map_h: %d\n", map->map_h);
-	printf("map_w: %d\n", map->map_w);
 	while (i < map->map_h)
 	{
 		j = 0;
@@ -423,13 +404,29 @@ void	initialize_data(t_frame *frame, int argc, char **argv)
 	file_descripter = get_file(argv[1]);
 	metadata = ft_calloc(1, sizeof(t_metadata));
 	if (!metadata)
-		throw_parse_error("Failed to allocate memory\n");
+		throw_parse_error(NULL);
 	if (!read_metadata(metadata, file_descripter))
 		throw_parse_error("Failed to read metadata\n");
 	if (!read_map(frame, &frame->map, file_descripter))
 		throw_parse_error("Failed to read map\n");
 	set_textures(frame, metadata);
+	free(metadata);
 	dbg_map(&frame->map);
+}
+
+void free_metadata(t_metadata *metadata)
+{
+	int	i;
+
+	i = 0;
+	while (i < TEXTURE_AMOUNT)
+	{
+		if (metadata->dir[i])
+			free(metadata->dir[i]);
+		i++;
+	}
+	free(metadata);
+	*metadata = (t_metadata){0};
 }
 
 t_bool	is_fullfilled(t_metadata *metadata)
