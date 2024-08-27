@@ -15,11 +15,16 @@ SOURCES :=	ft_mlx/mlx_setup.c \
 			interface/interface.c \
 			interface/minimap.c \
 			main.c \
-			data_parser/is_exist_file.c \
-			data_parser/is_ext.c \
-			data_parser/parser.c \
+			data_parser/check_file.c \
 			data_parser/throw_parse_error.c \
-			data_parser/validate_input.c
+			data_parser/parser.c \
+			data_parser/parse_meta.c \
+			data_parser/parse_meta_direction.c \
+			data_parser/parse_meta_color.c \
+			data_parser/parse_map.c \
+			data_parser/parse_map_read.c \
+			data_parser/parse_map_fill.c \
+			data_parser/parse_map_validate.c
 OBJECTS := $(SOURCES:.c=.o)
 
 CC = cc

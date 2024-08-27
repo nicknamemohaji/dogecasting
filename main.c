@@ -6,12 +6,14 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 16:20:26 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/08/20 14:29:25 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/08/27 15:47:11 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+// TODO DELETE THIS
+#include <stdlib.h>
 void	check_leak(void)
 {
 	system("leaks cub3D");
