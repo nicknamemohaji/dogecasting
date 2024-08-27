@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 21:11:06 by yechakim          #+#    #+#             */
-/*   Updated: 2024/08/27 15:46:32 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/08/27 15:51:25 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,14 @@ void	set_textures(t_frame *frame, t_metadata *metadata)
 {
 	frame->map.textures[DIR_N]
 		= cub3d_texture_create(frame, metadata->dir[DIR_N]);
+	free(metadata->dir[DIR_N]);
 	frame->map.textures[DIR_E]
 		= cub3d_texture_create(frame, metadata->dir[DIR_E]);
+	free(metadata->dir[DIR_E]);
 	frame->map.textures[DIR_W]
 		= cub3d_texture_create(frame, metadata->dir[DIR_W]);
+	free(metadata->dir[DIR_W]);
 	frame->map.textures[DIR_S]
 		= cub3d_texture_create(frame, metadata->dir[DIR_S]);
+	free(metadata->dir[DIR_S]);
 }
