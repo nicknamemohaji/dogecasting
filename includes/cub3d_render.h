@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:15:20 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/08/27 14:17:35 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/08/27 15:53:32 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,17 +83,5 @@ t_texture		*cub3d_texture_create(t_frame *frame, const char *file);
 // render_background.c
 
 void			render_background(t_frame *frame);
-
-/*********** interface **************/
-
-// interface.c
-
-void			cub3d_interface(t_frame *frame, t_map const *map,
-					const t_vector2d player_pos);
-
-// interface_minimap.c
-
-void			interface_minimap(t_frame *frame, t_map const *map,
-					const t_vector2d player_pos);
 
 #endif

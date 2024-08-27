@@ -12,8 +12,6 @@ SOURCES :=	ft_mlx/mlx_setup.c \
 			raycast/render.c \
 			raycast/render_texture.c \
 			raycast/render_background.c \
-			interface/interface.c \
-			interface/minimap.c \
 			main.c \
 			data_parser/check_file.c \
 			data_parser/throw_parse_error.c \
