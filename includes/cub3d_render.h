@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_render.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yechakim <yechakim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:15:20 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/08/27 15:53:32 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/08/27 18:29:01 by yechakim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 # include "cub3d_types.h"
 // constants header
 # include "cub3d_constants.h"
+// ft_lib
+# include "libft.h"
 
 /*********** ft_mlx ************/
 // mlx_image.c

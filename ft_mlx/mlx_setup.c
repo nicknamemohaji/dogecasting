@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_setup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yechakim <yechakim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 14:09:07 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/08/27 14:18:06 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/08/27 18:29:30 by yechakim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,8 @@ static void	setup_hook(t_frame *frame)
 		ft_mlx_event_key, frame);
 }
 
-// TODO: import libft and change to following code: 
-// write(2, msg, ft_strlen(msg));
-// [*] for now, use dprintf..
 void	error_exit(const char *msg)
 {
-	dprintf(2, "%s", msg);
+	ft_putstr_fd(2, msg);
 	exit(EXIT_FAILURE);
 }
