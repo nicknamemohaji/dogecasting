@@ -6,7 +6,6 @@ MLX_DIR := minilibx/
 SOURCES :=	ft_mlx/mlx_setup.c \
 			ft_mlx/mlx_image.c \
 			ft_mlx/mlx_hook.c \
-			ft_mlx/mlx_hook_2.c \
 			ft_mlx/mlx_shape.c \
 			raycast/ft_vector2.c \
 			raycast/cub3d.c \
