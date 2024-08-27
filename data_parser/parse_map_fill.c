@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map_fill.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yechakim <yechakim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 15:39:06 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/08/27 15:41:17 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/08/27 17:12:24 by yechakim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ void	fill_coordinate(t_frame *frame,
 	int			start_dir;
 
 	if (lines[pos.y][pos.x] == ' ')
-			map->map[pos.y][pos.x] = SPACE;
+		map->map[pos.y][pos.x] = SPACE;
 	else if (ft_strchr("01", lines[pos.y][pos.x]))
-				map->map[pos.y][pos.x] = lines[pos.y][pos.x] - '0';
+		map->map[pos.y][pos.x] = lines[pos.y][pos.x] - '0';
 	else if (ft_strchr(dir, lines[pos.y][pos.x]) != NULL)
 	{
 		map->map[pos.y][pos.x] = 0;
