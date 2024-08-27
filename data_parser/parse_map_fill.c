@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map_fill.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yechakim <yechakim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 15:39:06 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/08/27 17:12:24 by yechakim         ###   ########seoul.kr  */
+/*   Updated: 2024/08/28 08:12:34 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	fill_map(t_frame *frame, t_map *map, char **lines)
 void	fill_coordinate(t_frame *frame,
 			t_map *map, char **lines, t_vector2i pos)
 {
-	const char	*dir = "NSWE";
+	const char	*dir = "NWSE";
 	int			start_dir;
 
 	if (lines[pos.y][pos.x] == ' ')
