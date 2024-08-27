@@ -3,47 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_parser.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yechakim <yechakim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 17:01:47 by yechakim          #+#    #+#             */
-/*   Updated: 2024/07/15 21:51:11 by yechakim         ###   ########.fr       */
+/*   Updated: 2024/08/27 15:48:36 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CU3D_PARSER_H
-# define CU3D_PARSER_H
+#ifndef CUB3D_PARSER_H
+# define CUB3D_PARSER_H
 
 # include "cub3d_constants.h"
 # include "cub3d_types.h"
 # include "libft.h"
+
 # include <sys/fcntl.h>
+# include <stdio.h>
 
 /** CONSTNATS FOR PARSER */
-# define EXT ".cub"
-# define ERROR_MSG "Error\n"
-# define TEXTURE_AMOUNT 4 
-# define NORTH "NO "
-# define SOUTH "SO "
-# define WEST "WE "
-# define EAST "EA "
-# define FLOOR_COLOR "F "
-# define CEILING_COLOR "C "
-# define DIR_KEY_LEN 3
-# define COLOR_KEY_LEN 2
-
-
-typedef char *t_metadata_key;
+typedef char	*t_metadata_key;
 typedef struct s_metadata
 {
 	char	*dir[TEXTURE_AMOUNT];
 	int		colors[2];
-} t_metadata;
+}	t_metadata;
 
 typedef enum e_color
 {
 	FLOOR,
 	CEILING
-} t_color;
+}	t_color;
+
+# define SPACE 2
 
 /* API */
 void	initialize_data(t_frame *frame, int argc, char **argv);
@@ -51,9 +42,19 @@ void	initialize_data(t_frame *frame, int argc, char **argv);
 /* UTILS */
 
 void	throw_parse_error(char *msg);
-int 	is_ext(char *str, char *ext);
+int		is_ext(char *str, char *ext);
 int		is_exist_file(char *filename);
-t_bool	has_only_one_cub3d_file(int argc, char **argv);
 
+/* METADATA */
+t_bool	read_metadata(t_metadata *metadata, int fd);
+t_bool	try_fill_direction(t_metadata *info, char *line);
+t_bool	try_fill_color(t_metadata *info, char *line);
+
+/* MAP */
+t_bool	read_map(t_frame *frame, t_map *map, int file);
+char	*read_map_lines(int file);
+void	fill_mapsize(t_map *map, char **lines);
+void	fill_map(t_frame *frame, t_map *map, char **lines);
+void	validate_map(t_frame *frame, t_map *map);
 
 #endif

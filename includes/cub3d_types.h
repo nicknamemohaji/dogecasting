@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:02:01 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/07 02:37:58 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/08/27 15:58:59 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 # include "cub3d_constants.h"
 
 // mlx image info struct
-typedef struct s_image {
+typedef struct s_image
+{
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
@@ -81,7 +82,8 @@ typedef struct s_render_params
 }	t_render_params;
 
 // mlx frame struct
-typedef struct s_frame {
+typedef struct s_frame
+{
 	void		*mlx;
 	void		*window;
 	t_image		*image;

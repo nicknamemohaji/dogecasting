@@ -6,12 +6,14 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:03:35 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/07/28 20:22:56 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/08/27 14:19:11 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_CONSTANTS_H
 # define CUB3D_CONSTANTS_H
+
+# include "cub3d_error.h"
 
 // screen size
 # define SCREEN_WIDTH 2000
@@ -73,5 +75,18 @@ typedef enum e_layer
 	LAYER_MAP = 3,
 	LAYER_RAY = 4
 }	t_layer;
+
+# define MAP_FILE_EXT ".cub"
+# define VALID_TEXTURE_EXT ".xpm"
+
+# define TEXTURE_AMOUNT 4 
+# define NORTH "NO "
+# define SOUTH "SO "
+# define WEST "WE "
+# define EAST "EA "
+# define FLOOR_COLOR "F "
+# define CEILING_COLOR "C "
+# define DIR_KEY_LEN 3
+# define COLOR_KEY_LEN 2
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_render.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yechakim <yechakim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:15:20 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/08/20 14:15:53 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/08/27 18:29:01 by yechakim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 # include "cub3d_types.h"
 // constants header
 # include "cub3d_constants.h"
+// ft_lib
+# include "libft.h"
 
 /*********** ft_mlx ************/
 // mlx_image.c
@@ -51,10 +53,6 @@ void			error_exit(const char *msg);
 
 int				ft_mlx_destroy(t_frame *frame);
 int				ft_mlx_event_key(int keycode, t_frame *frame);
-
-// mlx_hook2.c
-
-int				ft_mlx_event_mouse(int button, int x, int y, t_frame *frame);
 
 // mlx_shape.c
 
@@ -87,17 +85,5 @@ t_texture		*cub3d_texture_create(t_frame *frame, const char *file);
 // render_background.c
 
 void			render_background(t_frame *frame);
-
-/*********** interface **************/
-
-// interface.c
-
-void			cub3d_interface(t_frame *frame, t_map const *map,
-					const t_vector2d player_pos);
-
-// interface_minimap.c
-
-void			interface_minimap(t_frame *frame, t_map const *map,
-					const t_vector2d player_pos);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yechakim <yechakim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 20:51:44 by yechakim          #+#    #+#             */
-/*   Updated: 2024/04/17 15:47:48 by yechakim         ###   ########.fr       */
+/*   Updated: 2024/08/27 14:18:34 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ typedef enum e_bool
 	FALSE = 0,
 	TRUE = 1,
 }	t_bool;
-
 
 size_t				ft_strs_len(const char **strs);
 void				*ft_free_strs(char **strs);

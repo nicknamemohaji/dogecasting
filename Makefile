@@ -6,21 +6,23 @@ MLX_DIR := minilibx/
 SOURCES :=	ft_mlx/mlx_setup.c \
 			ft_mlx/mlx_image.c \
 			ft_mlx/mlx_hook.c \
-			ft_mlx/mlx_hook_2.c \
 			ft_mlx/mlx_shape.c \
 			raycast/ft_vector2.c \
 			raycast/cub3d.c \
 			raycast/render.c \
 			raycast/render_texture.c \
 			raycast/render_background.c \
-			interface/interface.c \
-			interface/minimap.c \
 			main.c \
-			data_parser/is_exist_file.c \
-			data_parser/is_ext.c \
-			data_parser/parser.c \
+			data_parser/check_file.c \
 			data_parser/throw_parse_error.c \
-			data_parser/validate_input.c
+			data_parser/parser.c \
+			data_parser/parse_meta.c \
+			data_parser/parse_meta_direction.c \
+			data_parser/parse_meta_color.c \
+			data_parser/parse_map.c \
+			data_parser/parse_map_read.c \
+			data_parser/parse_map_fill.c \
+			data_parser/parse_map_validate.c
 OBJECTS := $(SOURCES:.c=.o)
 
 CC = cc
