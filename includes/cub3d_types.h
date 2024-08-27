@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:02:01 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/08/27 15:58:59 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/08/28 08:03:51 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,17 +84,19 @@ typedef struct s_render_params
 // mlx frame struct
 typedef struct s_frame
 {
-	void		*mlx;
-	void		*window;
-	t_image		*image;
+	void			*mlx;
+	void			*window;
+	t_image			*image;
 
-	t_map		map;
-	t_vector2d	player_dir;
-	t_vector2d	player_pos;
-	t_vector2d	camera_plane;
+	t_map			map;
+	unsigned int	color_ceiling;
+	unsigned int	color_floor;
+	t_vector2d		player_dir;
+	t_vector2d		player_pos;
+	t_vector2d		camera_plane;
 
-	t_dda		*dda;
-	void		(*draw)(struct s_frame *frame);
+	t_dda			*dda;
+	void			(*draw)(struct s_frame *frame);
 }	t_frame;
 
 #endif

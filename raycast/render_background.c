@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 07:08:07 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/08/27 14:17:42 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/08/28 08:04:19 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void	render_background(t_frame *frame)
 		{
 			ft_mlx_image_put(frame,
 				(t_vector2i){x, y},
-				0x00ffff);
+				frame->color_ceiling);
 			ft_mlx_image_put(frame,
 				(t_vector2i){x, (SCREEN_HEIGTH - 1 - y)},
-				0xffff00);
+				frame->color_floor);
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 21:11:06 by yechakim          #+#    #+#             */
-/*   Updated: 2024/08/27 15:51:25 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/08/28 08:06:58 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	initialize_data(t_frame *frame, int argc, char **argv)
 	if (!read_map(frame, &frame->map, file_descripter))
 		throw_parse_error("Failed to read map\n");
 	set_textures(frame, metadata);
+	frame->color_ceiling = metadata->colors[CEILING];
+	frame->color_floor = metadata->colors[FLOOR];
 	free(metadata);
 }
 
