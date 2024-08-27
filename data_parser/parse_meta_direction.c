@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_meta_direction.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yechakim <yechakim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 15:23:06 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/08/27 15:30:13 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/08/27 17:02:22 by yechakim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,7 @@ t_bool	fill_direction(t_metadata *info, t_dir dir, char *line)
 	info->dir[dir] = ft_strdup(line);
 	fd = open(line, O_RDONLY);
 	if (fd < 0)
-	{
-		printf("err in open\n");
 		throw_parse_error(NULL);
-	}
 	close(fd);
 	return (TRUE);
 }

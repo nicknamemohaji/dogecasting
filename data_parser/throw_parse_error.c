@@ -6,7 +6,7 @@
 /*   By: yechakim <yechakim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 17:45:48 by yechakim          #+#    #+#             */
-/*   Updated: 2024/08/23 10:50:16 by yechakim         ###   ########.fr       */
+/*   Updated: 2024/08/27 17:02:29 by yechakim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@ void	throw_parse_error(char *msg)
 	if (msg)
 		ft_putstr_fd(msg, 2);
 	else
-	{
-		printf("here\n");
 		perror(NULL);
-	}
 	exit(1);
 }
