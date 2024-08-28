@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 05:28:09 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/08/20 14:14:42 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/08/28 16:17:43 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	render_texture(t_frame *frame, t_render_params const *params)
 		ft_mlx_image_put(
 			frame,
 			(t_vector2i){x, y},
-			texture->image[tex_pos.x * texture->height + tex_pos.y]
+			texture->image[tex_pos.x + tex_pos.y]
 			);
 	}
 }
@@ -59,6 +59,7 @@ static void	calculate_texture_pos(t_render_params const *params,
 				- (SCREEN_HEIGTH - params->line_height) / 2)
 			* params->step;
 	}
+	tex_pos->x *= texture->height;
 }
 
 t_texture	*cub3d_texture_create(t_frame *frame, const char *file)

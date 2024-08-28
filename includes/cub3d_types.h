@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:02:01 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/08/28 08:03:51 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/08/28 16:50:38 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define CUB3D_TYPES_H
 
 # include "cub3d_constants.h"
+// include t_bool
+# include "libft.h"
 
 // mlx image info struct
 typedef struct s_image
@@ -97,6 +99,7 @@ typedef struct s_frame
 
 	t_dda			*dda;
 	void			(*draw)(struct s_frame *frame);
+	t_bool			event;
 }	t_frame;
 
 #endif
