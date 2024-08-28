@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_error.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yechakim <yechakim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:19:26 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/08/28 14:11:28 by yechakim         ###   ########.fr       */
+/*   Updated: 2024/08/28 17:16:41 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <errno.h>
 # include <err.h>
 
-# define ERROR_PREFIX "Error: "
+# define ERROR_PREFIX "Error\n"
 # define ERR_EXT "Invalid file extension\n"
 # define ERR_OPEN "Failed to open file\n" // delete
 # define ERR_DUPLICATE_METADATA "Already Registered Metadata\n"
