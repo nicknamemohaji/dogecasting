@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yechakim <yechakim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 21:11:06 by yechakim          #+#    #+#             */
-/*   Updated: 2024/08/28 08:06:58 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/08/28 13:54:35 by yechakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	initialize_data(t_frame *frame, int argc, char **argv)
 	metadata = ft_calloc(1, sizeof(t_metadata));
 	if (!metadata)
 		throw_parse_error(NULL);
+	metadata->colors[FLOOR] = -1;
+	metadata->colors[CEILING] = -1;
 	if (!read_metadata(metadata, file_descripter))
 		throw_parse_error("Failed to read metadata\n");
 	if (!read_map(frame, &frame->map, file_descripter))

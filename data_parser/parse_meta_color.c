@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_meta_color.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yechakim <yechakim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 15:30:20 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/08/27 15:31:59 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/08/28 14:13:59 by yechakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	fill_color(t_metadata *info, int key, char *colors)
 
 	color_cnt = 0;
 	color = 0;
+	info->colors[key] = 0;
 	if (valid_color_format(colors) == FALSE)
 		throw_parse_error(ERR_COLOR_FORMAT);
 	while (colors && color_cnt < 3)
@@ -65,23 +66,24 @@ t_bool	valid_color_format(char *colors)
 	color_amount = 0;
 	while (colors && *colors)
 	{
-		while (colors && *colors == ' ')
+		while (*colors == ' ')
 			colors++;
-		if (!colors)
+		if (*colors == '\0')
 			throw_parse_error(ERR_COLOR_FORMAT);
 		if (ft_isdigit(*colors) == FALSE)
 			throw_parse_error(ERR_COLOR_CHAR);
 		color_amount++;
-		while (colors && ft_isdigit(*colors) == TRUE)
+		while (*colors == '\0' && ft_isdigit(*colors) == TRUE)
 			colors++;
-		if (color_amount != 3 && !colors)
+		if ((color_amount == 3 && *colors != '\0')
+			|| (color_amount != 3 && *colors == '\0'))
 			throw_parse_error(ERR_COLOR_FORMAT);
-		if (colors && *colors != ',' && color_amount != 3)
-			throw_parse_error(ERR_COLOR_FORMAT_WITH_DELIMITER);
+		if (color_amount != 3 && *colors != ',')
+			throw_parse_error(ERR_COLOR_FORMAT);
 		if (colors && *colors)
 			colors++;
 	}
-	if (color_amount != 3)
+	if (*colors != '\0' || color_amount != 3)
 		throw_parse_error(ERR_COLOR_FORMAT);
 	return (TRUE);
 }

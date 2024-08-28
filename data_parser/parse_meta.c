@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_meta.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yechakim <yechakim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 15:16:21 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/08/27 15:45:51 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/08/28 14:14:50 by yechakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_bool	is_fullfilled(t_metadata *metadata)
 			return (FALSE);
 		i++;
 	}
-	if (!metadata->colors[CEILING] || !metadata->colors[FLOOR])
+	if (metadata->colors[CEILING] == -1 || metadata->colors[FLOOR] == -1)
 		return (FALSE);
 	return (TRUE);
 }

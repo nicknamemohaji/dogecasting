@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_error.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yechakim <yechakim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:19:26 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/08/27 14:20:54 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/08/28 14:11:28 by yechakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 # define ERR_COLOR_RANGE "Invalid color range\n"
 # define ERR_COLOR_VALUE "Invalid color value\n" 
 # define ERR_COLOR_CHAR "Invalid color character\n"
-# define ERR_COLOR_FORMAT_WITH_DELIMITER "Invalid color with ','\n"
 
 # define ERR_MAP "Invalid map: "
 # define ERR_MAP_DUP_PLAYER "Duplicate player position\n"
