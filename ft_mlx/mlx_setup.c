@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 14:09:07 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/08/27 18:45:50 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/08/28 16:49:42 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void	setup_frame(t_frame *frame)
 	frame->dda = malloc(SCREEN_WIDTH * sizeof(t_dda));
 	if (frame->dda == NULL)
 		error_exit("cannot allocate memory\n");
+	frame->event = FALSE;
 }
 
 void	ft_mlx_setup_image(t_frame *frame)
@@ -59,6 +60,7 @@ static void	setup_hook(t_frame *frame)
 	mlx_hook(frame->window, ON_DESTROY, NOEVENTMASK, ft_mlx_destroy, frame);
 	mlx_hook(frame->window, ON_KEYDOWN, NOEVENTMASK,
 		ft_mlx_event_key, frame);
+	mlx_loop_hook(frame->mlx, ft_mlx_render, frame);
 }
 
 void	error_exit(const char *msg)

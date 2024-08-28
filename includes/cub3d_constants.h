@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:03:35 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/08/27 14:19:11 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/08/28 16:57:07 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 // movement constants
 // move: 1/20 tiles
-# define MOVE_SPEED 0.1
+# define MOVE_SPEED 0.08
 # define MOVE_MAX 0.1
 // rotate: 5 degrees
 // fuck norm
