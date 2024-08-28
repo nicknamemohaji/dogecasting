@@ -6,7 +6,7 @@
 /*   By: yechakim <yechakim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 15:30:20 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/08/28 14:13:59 by yechakim         ###   ########.fr       */
+/*   Updated: 2024/08/28 16:20:27 by yechakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_bool	valid_color_format(char *colors)
 		if (ft_isdigit(*colors) == FALSE)
 			throw_parse_error(ERR_COLOR_CHAR);
 		color_amount++;
-		while (*colors == '\0' && ft_isdigit(*colors) == TRUE)
+		while (*colors != '\0' && ft_isdigit(*colors) == TRUE)
 			colors++;
 		if ((color_amount == 3 && *colors != '\0')
 			|| (color_amount != 3 && *colors == '\0'))
