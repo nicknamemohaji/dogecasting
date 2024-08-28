@@ -1,11 +1,11 @@
 NO ./assets/textures/doge.xpm
 SO ./assets/textures/42.xpm
 WE ./assets/textures/grid.xpm
-EA ./assets/textures/00zuck-musk-superJumbo.xpm
+EA ./assets/textures/doge.xpm
 F 63,63,63
-C 0,0,100
+C 100,100,100
 
-11111q
+11111
 10001
 1N001
 10001
