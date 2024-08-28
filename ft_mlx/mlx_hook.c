@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 23:05:52 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/08/28 16:54:02 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/08/28 17:05:19 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ int	ft_mlx_destroy(t_frame *frame)
 	while (++i < frame->map.map_h)
 		free(frame->map.map[i]);
 	free(frame->map.map);
+	i = -1;
+	while (++i < 4)
+	{
+		free(frame->map.textures[i]->image);
+		free(frame->map.textures[i]);
+	}
+	free(frame->dda);
 	exit(0);
 }
 
