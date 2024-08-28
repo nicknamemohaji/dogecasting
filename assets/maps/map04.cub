@@ -3,9 +3,19 @@ SO ./assets/textures/42.xpm
 WE ./assets/textures/grid.xpm
 EA ./assets/textures/00zuck-musk-superJumbo.xpm
 F 63,63,63
-C 0,0,100
+C 200,200,200
 
 11111
 10001
 1N001
+10001
+10001
+10001
+10001
+10001
+10001
+10101
+10001
+10101
 11111
+
