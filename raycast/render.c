@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 01:51:03 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/08/29 14:01:01 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/08/29 14:36:23 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	cub3d_render(t_frame *frame, const t_map *map,
 	t_render_params		render_param;
 	int					x;
 	static const float	screen_ratio = (float) SCREEN_WIDTH
-		/ (float) SCREEN_HEIGTH * 0.8f;
+		/ (float) SCREEN_HEIGTH * (0.48f / (float) POV);
 
 	render_background(frame);
 	x = -1;
