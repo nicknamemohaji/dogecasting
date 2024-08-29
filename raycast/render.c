@@ -6,7 +6,7 @@
 /*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 01:51:03 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/08/20 14:14:42 by kyungjle         ###   ########.fr       */
+/*   Updated: 2024/08/29 14:01:01 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,5 +143,6 @@ static void	calc_texture_param(t_render_params *params,
 		params->wall_pos = player_pos.y + params->dda_result->dist_plane
 			* params->dda_result->ray_dir.y;
 	params->wall_pos -= floor((params->wall_pos));
-	params->step = ((float) texture->height) / ((float) params->line_height);
+	params->step = (
+			(float) texture->height) / ((float) params->line_height + 1);
 }
