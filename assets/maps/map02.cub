@@ -1,7 +1,7 @@
 F 63,63,63
 C 0,0,100
 
-NO ./assets/textures/doge.xpm
+NO ./assets/textures/42.xpm
 SO ./assets/textures/42.xpm
 WE ./assets/textures/42.xpm
 EA ./assets/textures/42.xpm
