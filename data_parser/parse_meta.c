@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_meta.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yechakim <yechakim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: kyungjle <kyungjle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 15:16:21 by kyungjle          #+#    #+#             */
-/*   Updated: 2024/08/28 14:14:50 by yechakim         ###   ########.fr       */
+/*   Updated: 2024/09/02 14:21:51 by kyungjle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_bool	is_fullfilled(t_metadata *metadata)
 	int	i;
 
 	i = 0;
-	while (i < DIR_KEY_LEN)
+	while (i < 4)
 	{
 		if (metadata->dir[i] == NULL)
 			return (FALSE);
